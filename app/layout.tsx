@@ -1,9 +1,9 @@
-import Header from "@/components/Header";
+import Header from "@/components/layout/Header";
 import "./globals.css";
 
 export const metadata = {
-  title: "Floating Menu Design",
-  description: "Recreating specific navbar design",
+  title: "Yantrika",
+  description: "Robotics Club",
 };
 
 export default function RootLayout({
