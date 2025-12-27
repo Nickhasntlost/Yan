@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@/components/ThemeProvider";
 import Header from "@/components/layout/Header";
 import "./globals.css";
 
@@ -13,9 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#EEF0F5] antialiased min-h-screen">
-        <Header />
-        {children}
+      <body className="antialiased min-h-screen">
+        <ThemeProvider>
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

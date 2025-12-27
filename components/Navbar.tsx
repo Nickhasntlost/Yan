@@ -1,9 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { useTheme } from './ThemeProvider';
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { theme, toggleTheme } = useTheme();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -17,32 +19,23 @@ export default function Navbar() {
                         {/* Logo */}
                         <div className="navbar-logo">
                             <a
-                                href="#"
+                                href="./../public/Yan.png"
                                 className="text-xl font-medium tracking-tight text-gray-900 hover:opacity-70 transition-opacity"
                             >
-                                LUSION
                             </a>
                         </div>
 
                         {/* Actions */}
                         <div className="flex items-center gap-3 ml-auto">
-                            {/* Brand Icon */}
+                            {/* Theme Toggle */}
                             <button
-                                className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-white hover:scale-110 transition-transform shadow-sm"
-                                aria-label="Brand Icon"
+                                onClick={toggleTheme}
+                                className="hidden md:flex items-center justify-center w-12 h-6 rounded-full bg-gray-200 dark:bg-gray-800 transition-colors relative"
+                                aria-label="Toggle theme"
                             >
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <path d="M4 12c2.5-3 5.5-3 8 0s5.5 3 8 0" />
-                                </svg>
+                                <div
+                                    className={`absolute left-1 w-4 h-4 rounded-full bg-white shadow-sm transition-transform duration-300 ease-in-out ${theme === 'dark' ? 'translate-x-6' : 'translate-x-0'}`}
+                                ></div>
                             </button>
 
                             {/* Let's Talk Button */}

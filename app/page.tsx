@@ -7,7 +7,7 @@ import Hero from "@/components/home/Hero";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen w-full overflow-hidden bg-[#EEF0F5] text-[#050505] font-sans selection:bg-[#2A3FFF] selection:text-white pt-32">
+    <main className="relative min-h-screen w-full overflow-hidden bg-background text-foreground font-sans selection:bg-[#2A3FFF] selection:text-white pt-32 transition-colors duration-300">
 
       {/* --- 1. ABSTRACT BACKGROUND SHAPES --- */}
       <BackgroundShapes />

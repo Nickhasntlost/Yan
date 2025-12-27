@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MagneticButton from '../ui/MagneticButton';
 import MenuLink from './MenuLink';
+import { useTheme } from '../ThemeProvider';
 
 // --- Data ---
 const navLinks = [
@@ -18,6 +19,7 @@ export default function Header() {
     const [isOpen, setIsOpen] = useState(false); // Menu is closed by default now, unlike FloatingMenu
     const [activeLink, setActiveLink] = useState("HOME");
     const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+    const { theme, toggleTheme } = useTheme();
 
     return (
         <div className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-12 py-8 bg-transparent pointer-events-none text-[#050505] font-sans">
@@ -27,7 +29,7 @@ export default function Header() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                className="text-2xl font-semibold tracking-[-0.02em] uppercase pointer-events-auto"
+                className="text-4xl font-semibold tracking-[-0.02em] uppercase pointer-events-auto"
             >
                 Yantrika
             </motion.div>
@@ -39,11 +41,13 @@ export default function Header() {
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
                 className="flex gap-3 pointer-events-auto"
             >
-                {/* Squiggle Button */}
-                <MagneticButton className="w-11 h-11 bg-[rgba(255,255,255,0.5)] backdrop-blur-md rounded-full flex items-center justify-center text-black">
-                    <svg width="16" height="12" viewBox="0 0 20 10" className="stroke-current fill-none stroke-[1.5] stroke-linecap-round">
-                        <path d="M1 9 C 5 9, 5 1, 10 1 C 15 1, 15 9, 19 9" />
-                    </svg>
+                {/* Theme Toggle */}
+                <MagneticButton className="w-16 h-8 bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(255,255,255,0.1)] backdrop-blur-md rounded-full flex items-center justify-start px-1 relative cursor-pointer" onClick={toggleTheme}>
+                    <motion.div
+                        className="w-6 h-6 bg-[#1F2125] dark:bg-white rounded-full"
+                        animate={{ x: theme === 'dark' ? 32 : 0 }}
+                        transition={{ type: "spring", stiffness: 700, damping: 30 }}
+                    />
                 </MagneticButton>
 
                 {/* CTA */}

@@ -26,7 +26,7 @@ export default function Hero() {
     };
 
     return (
-        <section className="relative z-10 flex flex-col justify-center min-h-[75vh] px-6 md:px-12">
+        <section className="relative z-10 flex flex-col justify-center min-h-[100vh] px-6 md:px-12">
 
             {/* Massive Headline */}
             <div className="overflow-hidden">
