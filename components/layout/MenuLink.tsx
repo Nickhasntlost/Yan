@@ -15,7 +15,7 @@ export default function MenuLink({ title, href, index, isActive, isHovered, hasA
         >
             <a href={href} className="relative block overflow-hidden py-2">
                 <motion.span
-                    className="block text-3xl font-medium tracking-tight text-black transition-all duration-300"
+                    className="block text-3xl font-medium tracking-tight text-black dark:text-white transition-all duration-300"
                     animate={{
                         opacity: hasAnyHover ? (isHovered ? 1 : 0.4) : (isActive ? 1 : 0.8),
                         x: isHovered ? 10 : 0
@@ -30,7 +30,7 @@ export default function MenuLink({ title, href, index, isActive, isHovered, hasA
                     scale: isActive ? 1 : 0,
                     opacity: isActive ? 1 : 0
                 }}
-                className="w-2 h-2 bg-black rounded-full"
+                className="w-2 h-2 bg-black dark:bg-white rounded-full"
             />
         </motion.div>
     );

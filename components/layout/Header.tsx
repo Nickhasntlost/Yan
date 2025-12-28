@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MagneticButton from '../ui/MagneticButton';
 import MenuLink from './MenuLink';
@@ -20,6 +20,16 @@ export default function Header() {
     const [activeLink, setActiveLink] = useState("HOME");
     const [hoveredLink, setHoveredLink] = useState<string | null>(null);
     const { theme, toggleTheme } = useTheme();
+    const [showLogo, setShowLogo] = useState(true);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowLogo(window.scrollY < 50);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
         <div className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-12 py-8 bg-transparent pointer-events-none text-[#050505] font-sans">
@@ -27,11 +37,14 @@ export default function Header() {
             {/* Logo */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                className="text-4xl font-semibold tracking-[-0.02em] uppercase pointer-events-auto"
+                animate={{ opacity: showLogo ? 1 : 0, y: showLogo ? 0 : -20 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="pointer-events-auto flex items-center gap-4"
             >
-                Yantrika
+                <img src="/Yan.png" alt="Yantrika Logo" className="h-12 w-auto md:h-18" />
+                <span className="text-4xl font-semibold tracking-[-0.02em] uppercase text-[#050505] dark:text-white">
+                    YANTRIKA
+                </span>
             </motion.div>
 
             {/* Nav Actions */}
