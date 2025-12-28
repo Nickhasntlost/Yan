@@ -4,6 +4,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import BackgroundShapes from "@/components/home/BackgroundShapes";
 import Hero from "@/components/home/Hero";
+import Testimonials from "@/components/home/Testimonials";
+import Sponsors from "@/components/home/Sponsors";
+import Events from "@/components/home/Events";
 
 export default function Home() {
   return (
@@ -15,6 +18,10 @@ export default function Home() {
 
       {/* --- 2. HERO CONTENT --- */}
       <Hero />
+
+      <Sponsors />
+      <Events />
+      <Testimonials />
     </main>
   );
 }
