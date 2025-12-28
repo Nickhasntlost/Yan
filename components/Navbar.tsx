@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { useTheme } from './ThemeProvider';
+import MenuOverlay from './MenuOverlay';
+
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,16 +15,18 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className="fixed top-0 left-0 right-0 z-50 bg-[#f5f3f0] border-b border-gray-200">
+            <nav className="fixed top-0 left-0 right-0 z-50 bg-[#f5f3f0] dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
                 <div className="max-w-[1400px] mx-auto px-6 py-4">
                     <div className="flex items-center justify-between">
                         {/* Logo */}
                         <div className="navbar-logo">
                             <a
-                                href="./../public/Yan.png"
-                                className="text-xl font-medium tracking-tight text-gray-900 hover:opacity-70 transition-opacity"
+                                href="#"
+                                className="text-xl font-medium tracking-tight text-gray-900 dark:text-white hover:opacity-70 transition-opacity uppercase"
                             >
+                                YANTRIKA
                             </a>
+
                         </div>
 
                         {/* Actions */}
@@ -39,7 +43,7 @@ export default function Navbar() {
                             </button>
 
                             {/* Let's Talk Button */}
-                            <button className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-all hover:scale-105">
+                            <button className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-gray-900 dark:bg-gray-800 text-white rounded-full hover:bg-gray-800 dark:hover:bg-gray-700 transition-all hover:scale-105">
                                 <span className="text-[11px] font-medium tracking-wide">LET&apos;S TALK</span>
                                 <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
                             </button>
@@ -47,13 +51,13 @@ export default function Navbar() {
                             {/* Menu Button */}
                             <button
                                 onClick={toggleMenu}
-                                className="flex items-center gap-2 px-5 py-2.5 bg-transparent hover:bg-gray-200 rounded-full transition-colors"
+                                className="flex items-center gap-2 px-5 py-2.5 bg-transparent hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full transition-colors"
                                 aria-label="Toggle menu"
                             >
-                                <span className="text-[11px] font-medium tracking-wide">MENU</span>
+                                <span className="text-[11px] font-medium tracking-wide text-gray-900 dark:text-white">MENU</span>
                                 <div className="flex gap-0.5">
-                                    <span className="w-1.5 h-1.5 bg-gray-900 rounded-full"></span>
-                                    <span className="w-1.5 h-1.5 bg-gray-900 rounded-full"></span>
+                                    <span className="w-1.5 h-1.5 bg-gray-900 dark:bg-white rounded-full"></span>
+                                    <span className="w-1.5 h-1.5 bg-gray-900 dark:bg-white rounded-full"></span>
                                 </div>
                             </button>
                         </div>

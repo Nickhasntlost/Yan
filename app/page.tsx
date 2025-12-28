@@ -13,7 +13,6 @@ export default function Home() {
       <BackgroundShapes />
 
 
-
       {/* --- 2. HERO CONTENT --- */}
       <Hero />
     </main>
