@@ -18,7 +18,7 @@ export default function BackgroundShapes() {
                     duration: 8,
                     ease: "easeInOut",
                 }}
-                className="absolute top-[20%] -left-[5%] w-[35vw] h-[25vw] rounded-[50%_30%_60%_40%] bg-gradient-to-br from-[#2A3FFF] to-[#5E6EFF] blur-[60px] opacity-80 z-0 pointer-events-none"
+                className="absolute top-[250px] left-[0px] w-[35vw] h-[25vw] rounded-[50%_30%_60%_40%] bg-gradient-to-br from-[#2A3FFF] to-[#5E6EFF] blur-[60px] opacity-70 z-0 pointer-events-none"
             />
 
             {/* Secondary Shape (Tail) */}

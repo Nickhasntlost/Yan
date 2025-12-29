@@ -29,7 +29,8 @@ export default function Hero() {
         <section className="relative z-10 flex flex-col justify-center min-h-[100vh] px-6 md:px-12 pointer-events-none">
 
             {/* Blue Glow Background */}
-            <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/30 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none"></div>
+            {/* Blue Glow Background - Commented out to use BackgroundShapes instead */}
+            {/* <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/30 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none"></div> */}
 
             {/* Massive Headline */}
             <div className="overflow-hidden pb-4">

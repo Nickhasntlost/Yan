@@ -89,9 +89,9 @@ export default function Header() {
                         animate={{ scale: 1, opacity: 1, y: 0 }}
                         exit={{ scale: 0.9, opacity: 0, y: -20 }}
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute top-24 right-6 md:right-12 w-80 bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col pointer-events-auto"
+                        className="absolute top-24 right-6 md:right-10 w-80 bg-white dark:bg-[#050505] border border-gray-100 dark:border-gray-800 rounded-xl shadow-2xl overflow-hidden flex flex-col pointer-events-auto"
                     >
-                        <div className="p-8 flex flex-col gap-1">
+                        <div className="p-4 flex flex-col gap-1">
                             {navLinks.map((link, i) => (
                                 <MenuLink
                                     key={link.title}
@@ -101,6 +101,7 @@ export default function Header() {
                                     isActive={activeLink === link.title}
                                     isHovered={hoveredLink === link.title}
                                     hasAnyHover={hoveredLink !== null}
+                                    hasDot={activeLink === link.title}
                                     onHover={(state: boolean) => setHoveredLink(state ? link.title : null)}
                                     onClick={() => { setActiveLink(link.title); setIsOpen(false); }}
                                 />
