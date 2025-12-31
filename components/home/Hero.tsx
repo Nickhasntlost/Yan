@@ -26,7 +26,7 @@ export default function Hero() {
     };
 
     return (
-        <section className="relative z-10 flex flex-col justify-center min-h-[100vh] px-6 md:px-12 pointer-events-none">
+        <section className="relative z-10 flex flex-col justify-center min-h-[100vh] px-6 md:px-18 pointer-events-none">
 
             {/* Blue Glow Background */}
             {/* Blue Glow Background - Commented out to use BackgroundShapes instead */}
