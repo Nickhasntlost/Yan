@@ -2,16 +2,40 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 
 export default function BackgroundShapes() {
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            if (!containerRef.current) return;
+            const { left, top } = containerRef.current.getBoundingClientRect();
+            const x = e.clientX - left;
+            const y = e.clientY - top;
+            containerRef.current.style.setProperty('--x', `${x}px`);
+            containerRef.current.style.setProperty('--y', `${y}px`);
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
     return (
         <>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:translate-x-0 md:right-auto md:left-[13%] md:top-[3%] md:-translate-y-0 w-[70vw] md:w-[1000px] h-[70vw] md:h-[800px] z-0 pointer-events-none select-none">
+            <div
+                ref={containerRef}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:translate-x-0 md:right-auto md:left-[13%] md:top-[1%] md:-translate-y-0 w-[70vw] md:w-[1000px] h-[70vw] md:h-[800px] z-0 pointer-events-none select-none"
+                style={{
+                    maskImage: 'radial-gradient(300px circle at var(--x, -10000px) var(--y, -10000px), black 0%, transparent 80%)',
+                    WebkitMaskImage: 'radial-gradient(300px circle at var(--x, -10000px) var(--y, -10000px), black 0%, transparent 80%)'
+                } as React.CSSProperties}
+            >
                 <Image
                     src="/Yan.png"
                     alt="Background"
                     fill
-                    className="object-contain opacity-10"
+                    className="object-contain"
                     priority
                 />
             </div>
