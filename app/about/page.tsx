@@ -1,57 +1,310 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useRef } from "react";
+import Image from "next/image";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
+import { ArrowRight, Globe, Zap, Users } from "lucide-react";
 import BackgroundShapes from "@/components/home/BackgroundShapes";
-import { SmokeyFluidCursor } from "react-smokey-fluid-cursor";
+
+// --- ANIMATION VARIANTS ---
+const fadeInUp: Variants = {
+    hidden: { opacity: 0, y: 60 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 1, ease: [0.16, 1, 0.3, 1] }
+    }
+};
+
+const staggerContainer: Variants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.15,
+            delayChildren: 0.2
+        }
+    }
+};
+
+// --- HELPER COMPONENTS ---
+
+// 1. Text Reveal Component
+const RevealText = ({ children, className }: { children: React.ReactNode; className?: string }) => {
+    return (
+        <motion.div
+            variants={fadeInUp}
+            className={className}
+        >
+            {children}
+        </motion.div>
+    );
+};
+
+// 2. Parallax Image Component
+const ParallaxImage = ({ src, alt, className }: { src: string; alt: string; className?: string }) => {
+    const ref = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start end", "end start"]
+    });
+    const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+    const scale = useTransform(scrollYProgress, [0, 1], [1.1, 1]);
+
+    return (
+        <div ref={ref} className={`overflow-hidden rounded-2xl ${className}`}>
+            <motion.div style={{ y, scale }} className="w-full h-full relative">
+                <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    unoptimized // <--- FIXED: Allows external SVGs to load
+                />
+            </motion.div>
+        </div>
+    );
+};
+
+// --- MAIN PAGE COMPONENT ---
+
+// --- DATA ---
+const historyData = [
+    {
+        year: "2023",
+        title: "Club Founded",
+        desc: "Started with a single line follower bot and a dream to innovate.",
+        image: "https://placehold.co/800x800/e5e5e5/333?text=2023+Club+Founded"
+    },
+    {
+        year: "2024",
+        title: "National Victory",
+        desc: "First gold at RoboWars Nationals, putting us on the map.",
+        image: "https://placehold.co/800x800/e5e5e5/333?text=2024+Victory"
+    },
+    {
+        year: "2026",
+        title: "Tech Expo Host",
+        desc: "Organizing city-wide innovation summit for young robotics enthusiasts.",
+        image: "https://placehold.co/800x800/e5e5e5/333?text=2026+Expo"
+    },
+];
+
+// --- MAIN PAGE COMPONENT ---
 
 export default function About() {
+    const [activeHistory, setActiveHistory] = useState(0);
     return (
-        <main className="relative min-h-screen w-full overflow-hidden bg-background text-foreground font-sans selection:bg-[#2A3FFF] selection:text-white pt-32 transition-colors duration-300">
+        <main className="relative w-full bg-background text-foreground font-sans selection:bg-blue-500/30 overflow-hidden">
 
-            {/* --- FLUID CURSOR EFFECT --- */}
-            {/* <div className="fixed inset-0 z-50 pointer-events-none">
-                <SmokeyFluidCursor
-                    config={{
-                        simResolution: 128,
-                        dyeResolution: 512,
-                        densityDissipation: 0.98,
-                        velocityDissipation: 0.99,
-                        curl: 10,
-                        splatRadius: 0.2,
-                        colorUpdateSpeed: 2
-                    }}
-                />
-            </div> */}
-
-            {/* --- BACKGROUND SHAPES --- */}
+            {/* Background Elements */}
             <BackgroundShapes />
 
-            {/* --- CONTENT --- */}
-            <div className="relative z-10 px-6 md:px-12 max-w-7xl mx-auto">
+            {/* 1. HERO SECTION */}
+            <section className="relative pt-48 pb-20 px-6 md:px-12 max-w-[1400px] mx-auto min-h-[80vh] flex flex-col justify-center">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="mt-10"
+                    initial="hidden"
+                    animate="visible"
+                    variants={staggerContainer}
+                    className="max-w-5xl"
                 >
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8">
-                        About Us
-                    </h1>
-                    <div className="prose dark:prose-invert max-w-none text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                        <p>
-                            Welcome to Yantrika, the Robotics Club where innovation meets passion.
-                            We are a community of creators, engineers, and dreamers dedicated to
-                            pushing the boundaries of technology.
-                        </p>
-                        <p className="mt-4">
-                            Our mission is to foster a collaborative environment where students can learn,
-                            build, and grow together. Through workshops, competitions, and hands-on projects,
-                            we empower the next generation of roboticists.
-                        </p>
+                    <RevealText className="mb-6 flex items-center gap-3">
+                        <span className="h-[1px] w-12 bg-blue-600/50 block"></span>
+                        <span className="text-sm font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400">
+                            Who We Are
+                        </span>
+                    </RevealText>
+
+                    <div className="overflow-hidden">
+                        <motion.h1
+                            variants={fadeInUp}
+                            className="text-6xl md:text-9xl font-semibold tracking-tighter leading-[0.9] mb-8"
+                        >
+                            The Architects <br />
+                            <span className="text-gray-400 dark:text-gray-600 font-light italic">
+                                of Autonomy.
+                            </span>
+                        </motion.h1>
+                    </div>
+
+                    <RevealText className="max-w-2xl text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300">
+                        Yantrika is a robotics production studio bridging the gap between human creativity and mechanical precision. We don't just build bots; we engineer the future.
+                    </RevealText>
+                </motion.div>
+
+                {/* Floating "Scroll Down" Indicator */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.5, duration: 1 }}
+                    className="absolute bottom-12 left-6 md:left-12 flex items-center gap-4 text-xs font-bold tracking-widest text-gray-400"
+                >
+                    SCROLL TO EXPLORE
+                    <div className="h-px w-12 bg-gray-300 dark:bg-gray-700"></div>
+                </motion.div>
+            </section>
+
+            {/* 2. MISSION SECTION */}
+            <section className="relative py-32 px-6 md:px-12 max-w-[1400px] mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+
+                    {/* Left: Text Content */}
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        variants={staggerContainer}
+                    >
+                        <RevealText>
+                            <h2 className="text-sm font-bold tracking-widest text-gray-400 uppercase mb-4">01 — Our Mission</h2>
+                            <h3 className="text-4xl md:text-6xl font-medium mb-8 leading-tight">
+                                Automating the <br /> Impossible.
+                            </h3>
+                        </RevealText>
+
+                        <RevealText className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed space-y-6">
+                            <p>
+                                At Yantrika, our mission is to demystify robotics. We believe in "Automating One Bot At a Time," fostering a community where engineering meets imagination.
+                            </p>
+                            <p>
+                                From combat robotics to autonomous navigation, our multidisciplinary approach ensures that every member gains hands-on experience in the entire product lifecycle.
+                            </p>
+                        </RevealText>
+
+                        <RevealText className="mt-10">
+                            <button className="group flex items-center gap-2 text-sm font-bold border-b border-black dark:border-white pb-1 hover:opacity-70 transition-opacity">
+                                READ OUR MANIFESTO
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </button>
+                        </RevealText>
+                    </motion.div>
+
+                    {/* Right: Parallax Image */}
+                    <div className="h-[600px] w-full relative">
+                        {/* Blue Glow Behind Image */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-[100px]" />
+
+                        {/* Image Wrapper */}
+                        <ParallaxImage
+                            src="https://placehold.co/800x1000/1a1a1a/FFF?text=Robotic+Arm+Concept"
+                            alt="Robotic Arm Concept"
+                            className="w-full h-full shadow-2xl relative z-10 grayscale hover:grayscale-0 transition-all duration-700"
+                        />
+                    </div>
+                </div>
+            </section>
+
+            {/* 3. STATS SECTION */}
+            <section className="border-y border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-white/5 backdrop-blur-sm">
+                <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-200 dark:divide-gray-800">
+                    {[
+                        { label: "Active Members", value: "120+", icon: Users },
+                        { label: "Projects Built", value: "45", icon: Zap },
+                        { label: "Awards Won", value: "12", icon: Globe },
+                        { label: "Years Running", value: "03", icon: ArrowRight },
+                    ].map((stat, i) => (
+                        <div key={i} className="p-12 flex flex-col items-center justify-center text-center group hover:bg-white dark:hover:bg-white/10 transition-colors duration-500">
+                            <stat.icon className="w-6 h-6 mb-4 text-blue-600 opacity-50 group-hover:scale-110 transition-transform" />
+                            <span className="text-4xl md:text-5xl font-bold tracking-tight mb-2">{stat.value}</span>
+                            <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">{stat.label}</span>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+
+
+
+            <section className="relative py-32 px-6 md:px-12 max-w-[1400px] mx-auto z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+
+                    {/* Left: Dynamic Image Display */}
+                    <div className="h-[500px] w-full relative rounded-2xl overflow-hidden bg-gray-200 dark:bg-zinc-800 shadow-2xl">
+                        {historyData.map((item, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, scale: 1.1 }}
+                                animate={{
+                                    opacity: activeHistory === index ? 1 : 0,
+                                    scale: activeHistory === index ? 1 : 1.1
+                                }}
+                                transition={{ duration: 0.6 }}
+                                className="absolute inset-0 w-full h-full"
+                            >
+                                <Image
+                                    src={item.image}
+                                    alt={item.title}
+                                    fill
+                                    className="object-cover"
+                                    unoptimized
+                                />
+                                <div className="absolute inset-0 bg-blue-900/20 mix-blend-overlay" />
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* Right: Hoverable List */}
+                    <div className="flex flex-col justify-center pl-0 md:pl-12">
+                        <span className="text-sm font-bold tracking-widest text-blue-600 uppercase mb-8">01 — Timeline Data</span>
+                        <div className="space-y-2">
+                            {historyData.map((item, index) => (
+                                <div
+                                    key={index}
+                                    onMouseEnter={() => setActiveHistory(index)}
+                                    className={`group cursor-pointer p-8 rounded-xl transition-all duration-300 border border-transparent ${activeHistory === index ? "bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-800 shadow-lg scale-105" : "hover:bg-gray-100 dark:hover:bg-zinc-900/50 opacity-50 hover:opacity-100"}`}
+                                >
+                                    <div className="flex items-center justify-between mb-2">
+                                        <h3 className="text-3xl font-bold">{item.year}</h3>
+                                        <ArrowRight className={`w-5 h-5 transition-transform ${activeHistory === index ? "opacity-100 -rotate-45 text-blue-600" : "opacity-0"}`} />
+                                    </div>
+                                    <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">{item.title}</h4>
+                                    <p className="text-sm text-gray-500">{item.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 5. FACULTY MENTOR CARD */}
+            <section className="py-20 px-6 md:px-12 max-w-[1200px] mx-auto">
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                    className="relative bg-white dark:bg-[#111] rounded-3xl p-8 md:p-16 overflow-hidden border border-gray-100 dark:border-gray-800 shadow-2xl"
+                >
+                    {/* Internal Blue Glow */}
+                    <div className="absolute top-[-50%] right-[-10%] w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+
+                    <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
+                        <div className="w-48 h-48 md:w-64 md:h-64 flex-shrink-0 relative rounded-full overflow-hidden border-4 border-gray-50 dark:border-gray-800 shadow-lg">
+                            <Image
+                                src="https://placehold.co/400x400/2563eb/white?text=Faculty"
+                                alt="Dr. Ananya Sharma"
+                                fill
+                                className="object-cover"
+                                unoptimized // <--- FIXED: Allows external SVGs to load
+                            />
+                        </div>
+
+                        <div className="text-center md:text-left">
+                            <h2 className="text-xs font-bold tracking-widest text-blue-600 uppercase mb-3">Faculty Mentor</h2>
+                            <h3 className="text-3xl md:text-5xl font-medium mb-6">Dr. Ananya Sharma</h3>
+                            <p className="text-lg md:text-xl text-gray-500 italic mb-6">
+                                "Innovation is not just about building robots; it's about building the minds that build the robots."
+                            </p>
+                            <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-xl mx-auto md:mx-0">
+                                With over 15 years of experience in AI and Embedded Systems, Dr. Sharma guides Yantrika's technical direction, ensuring our projects are computationally intelligent and ethically sound.
+                            </p>
+                        </div>
                     </div>
                 </motion.div>
-            </div>
+            </section>
+
+            {/* 6. BOTTOM SPACER */}
+            <div className="h-32"></div>
+
         </main>
     );
 }
