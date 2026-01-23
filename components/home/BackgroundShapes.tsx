@@ -7,19 +7,19 @@ import { useEffect, useRef } from 'react';
 export default function BackgroundShapes() {
     const containerRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            if (!containerRef.current) return;
-            const { left, top } = containerRef.current.getBoundingClientRect();
-            const x = e.clientX - left;
-            const y = e.clientY - top;
-            containerRef.current.style.setProperty('--x', `${x}px`);
-            containerRef.current.style.setProperty('--y', `${y}px`);
-        };
+    // useEffect(() => {
+    //     const handleMouseMove = (e: MouseEvent) => {
+    //         if (!containerRef.current) return;
+    //         const { left, top } = containerRef.current.getBoundingClientRect();
+    //         const x = e.clientX - left;
+    //         const y = e.clientY - top;
+    //         containerRef.current.style.setProperty('--x', `${x}px`);
+    //         containerRef.current.style.setProperty('--y', `${y}px`);
+    //     };
 
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-    }, []);
+    //     window.addEventListener('mousemove', handleMouseMove);
+    //     return () => window.removeEventListener('mousemove', handleMouseMove);
+    // }, []);
 
     return (
         <>

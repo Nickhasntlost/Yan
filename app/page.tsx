@@ -17,7 +17,7 @@ export default function Home() {
 
       {/* --- FLUID CURSOR EFFECT --- */}
       {/* Z-index ensures it sits on top or behind as needed. Pointer-events-none lets you click through it. */}
-      <div className="fixed inset-0 z-50 pointer-events-none">
+      {/* <div className="fixed inset-0 z-50 pointer-events-none">
         <SmokeyFluidCursor
           config={{
             simResolution: 128,
@@ -29,7 +29,7 @@ export default function Home() {
             colorUpdateSpeed: 2
           }}
         />
-      </div>
+      </div> */}
 
       {/* Add the Splash Effect here */}
       {/* <WaterSplash /> */}

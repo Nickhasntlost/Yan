@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import MagneticButton from '../ui/MagneticButton';
 import MenuLink from './MenuLink';
@@ -8,10 +9,10 @@ import { useTheme } from '../ThemeProvider';
 
 // --- Data ---
 const navLinks = [
-    { title: "HOME", href: "#home" },
-    { title: "ABOUT US", href: "#about" },
-    { title: "PROJECTS", href: "#projects" },
-    { title: "CONTACT", href: "#contact" },
+    { title: "HOME", href: "/#home" },
+    { title: "ABOUT US", href: "/about" },
+    { title: "PROJECTS", href: "/#projects" },
+    { title: "CONTACT", href: "/#contact" },
 ];
 
 // --- Main Component ---
@@ -21,6 +22,17 @@ export default function Header() {
     const [hoveredLink, setHoveredLink] = useState<string | null>(null);
     const { theme, toggleTheme } = useTheme();
     const [showLogo, setShowLogo] = useState(true);
+    const pathname = usePathname();
+
+    useEffect(() => {
+        if (pathname === '/about') {
+            setActiveLink("ABOUT US");
+        } else if (pathname === '/') {
+            if (activeLink === "ABOUT US") {
+                setActiveLink("HOME");
+            }
+        }
+    }, [pathname]);
 
     useEffect(() => {
         const handleScroll = () => {
