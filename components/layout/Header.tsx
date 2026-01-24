@@ -12,6 +12,7 @@ const navLinks = [
     { title: "HOME", href: "/#home" },
     { title: "ABOUT US", href: "/about" },
     { title: "PROJECTS", href: "/projects" },
+    { title: "CORE TEAM", href: "/team" },
     { title: "CONTACT", href: "/contact" },
 ];
 
@@ -27,10 +28,14 @@ export default function Header() {
     useEffect(() => {
         if (pathname === '/about') {
             setActiveLink("ABOUT US");
+        } else if (pathname === '/team') {
+            setActiveLink("CORE TEAM");
+        } else if (pathname === '/projects') {
+            setActiveLink("PROJECTS");
+        } else if (pathname === '/contact') {
+            setActiveLink("CONTACT");
         } else if (pathname === '/') {
-            if (activeLink === "ABOUT US") {
-                setActiveLink("HOME");
-            }
+            setActiveLink("HOME");
         }
     }, [pathname]);
 
