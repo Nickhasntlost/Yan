@@ -10,6 +10,7 @@ import Sponsors from "@/components/home/Sponsors";
 import Events from "@/components/home/Events";
 import WaterSplash from "@/components/ui/WaterSplash";
 import { SmokeyFluidCursor } from "react-smokey-fluid-cursor";
+import Antigravity from "@/components/ui/Antigravity";
 
 export default function Home() {
   return (
@@ -33,6 +34,13 @@ export default function Home() {
 
       {/* Add the Splash Effect here */}
       {/* <WaterSplash /> */}
+
+      {/* --- 0. ANTIGRAVITY 3D EFFECT --- */}
+      <Antigravity
+        className="fixed inset-0 z-0 pointer-events-none opacity-60"
+        magnetRadius={15}
+        fieldStrength={5}
+      />
 
       {/* --- 1. ABSTRACT BACKGROUND SHAPES --- */}
       <BackgroundShapes />
