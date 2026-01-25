@@ -19,3 +19,30 @@ body {
   padding: 0;
   transition: color 0.3s ease, background-color 0.3s ease;
 }
+
+@keyframes animate-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* refined gradient for seamless loop: Blue -> Purple -> Blue -> Purple */
+.masked-logo {
+  color: var(--foreground);
+  /* Default state */
+}
+
+.masked-logo.animating,
+.masked-logo:hover {
+  background-image: linear-gradient(to right, #3b82f6, #9333ea, #3b82f6, #9333ea);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animate-gradient 3s linear infinite;
+}

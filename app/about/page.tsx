@@ -2,7 +2,8 @@
 
 import React, { useState, useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, Variants } from "framer-motion";
+import { motion, useScroll, useTransform, Variants, useInView, useSpring, useMotionValue } from "framer-motion";
+import { useEffect } from "react";
 import { ArrowRight, Globe, Zap, Users } from "lucide-react";
 import BackgroundShapes from "@/components/home/BackgroundShapes";
 
@@ -89,6 +90,27 @@ const historyData = [
         image: "https://placehold.co/800x800/e5e5e5/333?text=2026+Expo"
     },
 ];
+
+// 3. Counter Component
+const Counter = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: "-20px" });
+    const springValue = useSpring(0, { duration: 2000, bounce: 0 });
+    const displayValue = useTransform(springValue, (current) => Math.round(current));
+
+    useEffect(() => {
+        if (isInView) {
+            springValue.set(value);
+        }
+    }, [isInView, value, springValue]);
+
+    return (
+        <div ref={ref} className="text-4xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white flex items-baseline">
+            <motion.span>{displayValue}</motion.span>
+            <span>{suffix}</span>
+        </div>
+    );
+};
 
 // --- MAIN PAGE COMPONENT ---
 
@@ -195,20 +217,30 @@ export default function About() {
             </section>
 
             {/* 3. STATS SECTION */}
-            <section className="border-y border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-white/5 backdrop-blur-sm">
-                <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-200 dark:divide-gray-800">
-                    {[
-                        { label: "Active Members", value: "120+", icon: Users },
-                        { label: "Projects Built", value: "45", icon: Zap },
-                        { label: "Awards Won", value: "12", icon: Globe },
-                        { label: "Years Running", value: "03", icon: ArrowRight },
-                    ].map((stat, i) => (
-                        <div key={i} className="p-12 flex flex-col items-center justify-center text-center group hover:bg-white dark:hover:bg-white/10 transition-colors duration-500">
-                            <stat.icon className="w-6 h-6 mb-4 text-blue-600 opacity-50 group-hover:scale-110 transition-transform" />
-                            <span className="text-4xl md:text-5xl font-bold tracking-tight mb-2">{stat.value}</span>
-                            <span className="text-xs font-bold tracking-widest text-gray-400 uppercase">{stat.label}</span>
-                        </div>
-                    ))}
+            <section className="relative z-10 -mt-20 px-6 md:px-12 pointer-events-none">
+                <div className="max-w-[1200px] mx-auto pointer-events-auto">
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8 }}
+                        className="grid grid-cols-2 md:grid-cols-4 bg-white dark:bg-[#111] rounded-[2.5rem] shadow-2xl shadow-blue-900/10 dark:shadow-blue-900/5 overflow-hidden border border-gray-100 dark:border-gray-800"
+                    >
+                        {[
+                            { label: "Active Members", value: 120, suffix: "+", icon: Users },
+                            { label: "Projects Built", value: 45, suffix: "", icon: Zap },
+                            { label: "Awards Won", value: 12, suffix: "", icon: Globe },
+                            { label: "Years Running", value: 3, suffix: "", icon: ArrowRight },
+                        ].map((stat, i) => (
+                            <div key={i} className="relative p-10 md:p-12 flex flex-col items-center justify-center text-center group border-r border-b md:border-b-0 last:border-r-0 md:last:border-r-0 border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors duration-500">
+                                <div className="mb-6 p-4 rounded-full bg-blue-50 dark:bg-blue-500/10 group-hover:scale-110 group-hover:bg-blue-100 dark:group-hover:bg-blue-500/20 transition-all duration-300">
+                                    <stat.icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                                </div>
+                                <Counter value={stat.value} suffix={stat.suffix} />
+                                <span className="text-xs font-bold tracking-widest text-gray-400 uppercase mt-2">{stat.label}</span>
+                            </div>
+                        ))}
+                    </motion.div>
                 </div>
             </section>
 

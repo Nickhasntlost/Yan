@@ -39,6 +39,15 @@ export default function Header() {
         }
     }, [pathname]);
 
+    // Manage initial logo animation state
+    const [isLoaded, setIsLoaded] = useState(true);
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoaded(false);
+        }, 3000); // Animation duration
+        return () => clearTimeout(timer);
+    }, []);
+
     useEffect(() => {
         const handleScroll = () => {
             setShowLogo(window.scrollY < 50);
@@ -59,7 +68,7 @@ export default function Header() {
                 className="pointer-events-auto flex items-center gap-4"
             >
                 <img src="/Yan.png" alt="Yantrika Logo" className="h-12 w-auto md:h-18" />
-                <span className="text-4xl font-semibold tracking-[-0.02em] uppercase text-[#050505] dark:text-white">
+                <span className={`text-4xl font-semibold tracking-[-0.02em] uppercase masked-logo ${isLoaded ? 'animating' : ''}`}>
                     YANTRIKA
                 </span>
             </motion.div>
