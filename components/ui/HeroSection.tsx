@@ -38,7 +38,7 @@ export default function HeroSection({
     scrollText = "SCROLL TO EXPLORE"
 }: HeroSectionProps) {
     return (
-        <section className="relative pt-32 pb-20 px-6 md:px-12 max-w-[1400px] mx-auto min-h-[80vh] flex flex-col justify-center">
+        <section className="relative pt-38 pb-20 px-6 md:px-12 max-w-[1400px] mx-auto min-h-[80vh] flex flex-col justify-center">
             <motion.div
                 initial="hidden"
                 animate="visible"
@@ -55,7 +55,7 @@ export default function HeroSection({
                 <div className="overflow-hidden">
                     <motion.h1
                         variants={fadeInUp}
-                        className="text-8xl md:text-8xl font-medium tracking-tighter leading-[1.1] mb-8 font-heading text-zinc-900 dark:text-white"
+                        className="text-7xl md:text-8xl font-medium tracking-tighter leading-[1.1] mb-8 font-heading text-zinc-900 dark:text-white"
                     >
                         {title} <br />
                         <span className="text-gray-400 dark:text-gray-600 font-light italic">
