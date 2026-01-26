@@ -21,12 +21,13 @@ import {
     Globe
 } from "lucide-react";
 import BackgroundShapes from "@/components/home/BackgroundShapes";
+import HeroSection from "@/components/ui/HeroSection";
 
 // --- RANDOMIZED HIGH-QUALITY DATA ---
 const coreTeam = [
     {
         id: "member-1",
-        name: "Jainam Jain",
+        name: "Soham Sawant",
         role: "Captain",
         department: "Computer Science",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
@@ -36,7 +37,7 @@ const coreTeam = [
     },
     {
         id: "member-2",
-        name: "Jay Kore",
+        name: "Yash Padhen",
         role: "Vice Captain",
         department: "Systems Eng.",
         image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop",
@@ -147,31 +148,17 @@ export default function CoreTeamPage() {
                 style={{ backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")` }}></div>
 
             {/* 1. HERO SECTION */}
-            <section className="relative pt-40 pb-32 px-6 z-10 overflow-hidden">
-                <div className="max-w-[1600px] mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        className="border-l border-zinc-200 dark:border-white/10 pl-8 md:pl-16"
-                    >
-                        <div className="flex items-center gap-4 mb-8">
-                            <div className="h-[1px] w-12 bg-blue-500"></div>
-                            <span className="text-xs font-mono uppercase tracking-[0.4em] text-blue-500 dark:text-blue-400">The Architects</span>
-                        </div>
-                        <h1 className="text-6xl md:text-[9rem] font-bold leading-[0.85] tracking-tighter mb-10 text-zinc-900 dark:text-white">
-                            Core <span className="text-transparent bg-clip-text bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-500 dark:from-white dark:via-white dark:to-white/20 italic font-serif">Leadership</span>
-                        </h1>
-                        <p className="text-zinc-600 dark:text-white/60 text-lg md:text-xl max-w-2xl font-light leading-relaxed">
-                            We are the engineers of the impossible. A collective of visionaries building the autonomous future, one line of code and one servo at a time.
-                        </p>
-                    </motion.div>
-                </div>
-            </section>
+            <HeroSection
+                tag="WHO WE ARE"
+                title="Core"
+                subTitle="Leadership"
+                description="We are the engineers of the impossible. A collective of visionaries building the autonomous future, one line of code and one servo at a time."
+                scrollText="SCROLL TO EXPLORE"
+            />
 
             {/* 2. GALLERY GRID */}
             <section className="relative px-6 pb-40 z-10">
-                <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                <div className="max-w-[1136px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
                     {coreTeam.map((member) => (
                         <TiltCard
                             key={member.id}

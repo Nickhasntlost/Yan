@@ -4,6 +4,7 @@ import React from "react";
 import BackgroundShapes from "@/components/home/BackgroundShapes";
 import { motion, Variants } from "framer-motion";
 import { Mail, MapPin, Phone, Send, ArrowRight } from "lucide-react";
+import HeroSection from "@/components/ui/HeroSection";
 
 // --- ANIMATION VARIANTS ---
 const fadeInUp: Variants = {
@@ -75,37 +76,12 @@ export default function Contact() {
             <BackgroundShapes />
 
             {/* HERO SECTION */}
-            <section className="relative pt-32 md:pt-48 pb-20 px-6 md:px-12 max-w-[1400px] mx-auto">
-                <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={staggerContainer}
-                    className="max-w-6xl"
-                >
-                    <motion.div variants={fadeInUp} className="mb-8 flex items-center gap-4">
-                        <span className="h-[2px] w-12 bg-blue-600 dark:bg-blue-500 block"></span>
-                        <span className="text-sm font-bold tracking-[0.25em] uppercase text-blue-600 dark:text-blue-500">
-                            Get In Touch
-                        </span>
-                    </motion.div>
-
-                    <div className="overflow-hidden mb-10">
-                        <motion.h1
-                            variants={fadeInUp}
-                            className="text-6xl md:text-[7rem] font-semibold tracking-tighter leading-[0.95]"
-                        >
-                            Let's Build the <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600 dark:from-gray-500 dark:to-gray-700 font-light italic">
-                                Future Together.
-                            </span>
-                        </motion.h1>
-                    </div>
-
-                    <motion.p variants={fadeInUp} className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl leading-relaxed">
-                        Whether you're looking to collaborate, join the club, or just want to talk robotics — our channels are open.
-                    </motion.p>
-                </motion.div>
-            </section>
+            <HeroSection
+                tag="Get In Touch"
+                title="Let's Build the"
+                subTitle="Future Together."
+                description="Whether you're looking to collaborate, join the club, or just want to talk robotics — our channels are open."
+            />
 
             {/* MAIN CONTENT SPLIT */}
             <section className="relative pb-32 px-6 md:px-12 max-w-[1400px] mx-auto z-10">
@@ -125,7 +101,7 @@ export default function Contact() {
 
                         <div className="relative z-10">
                             <h3 className="text-2xl md:text-3xl font-bold mb-8">Send a Message</h3>
-                            
+
                             <form onSubmit={(e) => e.preventDefault()} className="space-y-2">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                                     <ContactInput label="First Name" placeholder="Jane" />
@@ -148,7 +124,7 @@ export default function Contact() {
                     {/* RIGHT: INFO & MAP */}
                     {/* ALIGNMENT FIX: Removed padding-top so Top of Form aligns with Top of Info */}
                     <div className="flex flex-col h-full justify-between gap-8">
-                        
+
                         {/* INFO CARDS STACK */}
                         <div className="space-y-4">
                             <ContactInfoItem
@@ -181,7 +157,7 @@ export default function Contact() {
                             className="h-[450px] w-full rounded-[2rem] bg-gray-200 dark:bg-zinc-800 relative overflow-hidden group border border-gray-200 dark:border-zinc-700 shadow-lg"
                         >
                             <div className="absolute inset-0 bg-[url('https://placehold.co/1200x800/18181b/3f3f46?text=Map+Location')] bg-cover bg-center opacity-60 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"></div>
-                            
+
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-8">
                                 <div className="flex items-center gap-3 text-xs font-bold text-white tracking-widest">
                                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>

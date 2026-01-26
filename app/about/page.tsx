@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform, Variants, useInView, useSpring, useMot
 import { useEffect } from "react";
 import { ArrowRight, Globe, Zap, Users } from "lucide-react";
 import BackgroundShapes from "@/components/home/BackgroundShapes";
+import HeroSection from "@/components/ui/HeroSection";
 
 // --- ANIMATION VARIANTS ---
 const fadeInUp: Variants = {
@@ -123,48 +124,12 @@ export default function About() {
             <BackgroundShapes />
 
             {/* 1. HERO SECTION */}
-            <section className="relative pt-48 pb-20 px-6 md:px-12 max-w-[1400px] mx-auto min-h-[80vh] flex flex-col justify-center">
-                <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={staggerContainer}
-                    className="max-w-5xl"
-                >
-                    <RevealText className="mb-6 flex items-center gap-3">
-                        <span className="h-[1px] w-12 bg-blue-600/50 block"></span>
-                        <span className="text-sm font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400">
-                            Who We Are
-                        </span>
-                    </RevealText>
-
-                    <div className="overflow-hidden">
-                        <motion.h1
-                            variants={fadeInUp}
-                            className="text-6xl md:text-9xl font-semibold tracking-tighter leading-[0.9] mb-8"
-                        >
-                            The Architects <br />
-                            <span className="text-gray-400 dark:text-gray-600 font-light italic">
-                                of Autonomy.
-                            </span>
-                        </motion.h1>
-                    </div>
-
-                    <RevealText className="max-w-2xl text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300">
-                        Yantrika is a robotics production studio bridging the gap between human creativity and mechanical precision. We don't just build bots; we engineer the future.
-                    </RevealText>
-                </motion.div>
-
-                {/* Floating "Scroll Down" Indicator */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.5, duration: 1 }}
-                    className="absolute bottom-12 left-6 md:left-12 flex items-center gap-4 text-xs font-bold tracking-widest text-gray-400"
-                >
-                    SCROLL TO EXPLORE
-                    <div className="h-px w-12 bg-gray-300 dark:bg-gray-700"></div>
-                </motion.div>
-            </section>
+            <HeroSection
+                tag="Who We Are"
+                title="The Architects"
+                subTitle="of Autonomy."
+                description="Yantrika is a robotics production studio bridging the gap between human creativity and mechanical precision. We don't just build bots; we engineer the future."
+            />
 
             {/* 2. MISSION SECTION */}
             <section className="relative py-32 px-6 md:px-12 max-w-[1400px] mx-auto">

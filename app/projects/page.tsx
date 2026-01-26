@@ -5,6 +5,7 @@ import BackgroundShapes from "@/components/home/BackgroundShapes";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { ArrowRight, Cpu, Zap, Activity } from "lucide-react";
 import Image from "next/image";
+import HeroSection from "@/components/ui/HeroSection";
 
 // --- ANIMATION VARIANTS ---
 const fadeInUp: Variants = {
@@ -90,8 +91,8 @@ const FilterTabs = ({ active, setActive }: { active: string; setActive: (c: stri
                     key={cat}
                     onClick={() => setActive(cat)}
                     className={`px-6 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all border ${active === cat
-                            ? "bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-900/20"
-                            : "bg-white/5 border-white/10 text-gray-500 hover:bg-white/10 hover:border-white/20 dark:text-gray-400"
+                        ? "bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-900/20"
+                        : "bg-white/5 border-white/10 text-gray-500 hover:bg-white/10 hover:border-white/20 dark:text-gray-400"
                         }`}
                 >
                     {cat}
@@ -172,37 +173,12 @@ export default function Projects() {
             <BackgroundShapes />
 
             {/* HERO SECTION */}
-            <section className="relative pt-32 md:pt-48 pb-20 px-6 md:px-12 max-w-[1400px] mx-auto">
-                <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={staggerContainer}
-                    className="max-w-6xl"
-                >
-                    <motion.div variants={fadeInUp} className="mb-8 flex items-center gap-4">
-                        <span className="h-[2px] w-12 bg-blue-600 dark:bg-blue-500 block"></span>
-                        <span className="text-sm font-bold tracking-[0.25em] uppercase text-blue-600 dark:text-blue-500">
-                            Our Portfolio
-                        </span>
-                    </motion.div>
-
-                    <div className="overflow-hidden mb-10">
-                        <motion.h1
-                            variants={fadeInUp}
-                            className="text-5xl md:text-[6rem] font-semibold tracking-tighter leading-[0.95]"
-                        >
-                            Engineering the <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600 dark:from-gray-500 dark:to-gray-700 font-light italic">
-                                Impossible.
-                            </span>
-                        </motion.h1>
-                    </div>
-
-                    <motion.p variants={fadeInUp} className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl leading-relaxed">
-                        Explore our latest innovations, from destructive combat bots to life-saving autonomous drones.
-                    </motion.p>
-                </motion.div>
-            </section>
+            <HeroSection
+                tag="Our Portfolio"
+                title="Engineering the"
+                subTitle="Impossible."
+                description="Explore our latest innovations, from destructive combat bots to life-saving autonomous drones."
+            />
 
             {/* PROJECTS GRID */}
             <section className="relative pb-32 px-6 md:px-12 max-w-[1400px] mx-auto z-10">
@@ -222,6 +198,82 @@ export default function Projects() {
                     </AnimatePresence>
                 </motion.div>
             </section>
+
+            {/* LEARNING LAB SECTION */}
+            <section className="relative pb-32 px-6 md:px-12 max-w-[1400px] mx-auto z-10">
+                <div className="mb-16 border-t border-gray-200 dark:border-white/10 pt-20">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="flex flex-col md:flex-row md:items-end justify-between gap-6"
+                    >
+                        <div>
+                            <span className="text-sm font-bold tracking-[0.25em] uppercase text-blue-600 dark:text-blue-500 mb-2 block">
+                                The Learning Lab
+                            </span>
+                            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
+                                Experimental <span className="text-gray-400 font-serif italic font-light">Prototypes</span>
+                            </h2>
+                        </div>
+                        <p className="max-w-md text-gray-500 dark:text-gray-400 leading-relaxed">
+                            A playground for our unfinished ideas, research concepts, and initial prototypes where we learn by doing.
+                        </p>
+                    </motion.div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {[
+                        {
+                            title: "Robotic Arm Prototype",
+                            desc: "6-axis manipulator designed for studying inverse kinematics and path planning algorithms. Built with custom 3D printed parts and high-torque servos.",
+                            tags: ["C++", "Kinematics", "Servo Control"],
+                            image: "https://placehold.co/800x600/1e293b/FFF?text=Robo+Arm"
+                        },
+                        {
+                            title: "Line Follower Beta",
+                            desc: "High-speed line tracking bot using PID control loop and custom IR sensor array. Optimized for sub-millisecond response times.",
+                            tags: ["Embedded C", "PID", "PCB Design"],
+                            image: "https://placehold.co/800x600/1e293b/FFF?text=Line+Follower"
+                        }
+                    ].map((item, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.2 }}
+                            className="group relative h-[400px] rounded-[2.5rem] overflow-hidden border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-zinc-900/50"
+                        >
+                            <Image
+                                src={item.image}
+                                alt={item.title}
+                                fill
+                                className="object-cover opacity-60 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700"
+                                unoptimized
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+                            <div className="absolute bottom-0 left-0 w-full p-10">
+                                <div className="flex flex-wrap gap-2 mb-4">
+                                    {item.tags.map(tag => (
+                                        <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/10 backdrop-blur-md text-white border border-white/10">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                                <h3 className="text-3xl font-bold text-white mb-2">{item.title}</h3>
+                                <p className="text-gray-300 line-clamp-2 leading-relaxed">{item.desc}</p>
+                            </div>
+
+                            <button className="absolute top-8 right-8 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/10 group-hover:bg-blue-600 group-hover:border-blue-600 transition-all">
+                                <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform" />
+                            </button>
+                        </motion.div>
+                    ))}
+                </div>
+            </section>
+
         </main>
     );
 }

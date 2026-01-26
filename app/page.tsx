@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import BackgroundShapes from "@/components/home/BackgroundShapes";
-import Hero from "@/components/home/Hero";
+import HeroSection from "@/components/ui/HeroSection";
 import Testimonials from "@/components/home/Testimonials";
 import Sponsors from "@/components/home/Sponsors";
 import Events from "@/components/home/Events";
@@ -35,15 +35,20 @@ export default function Home() {
       {/* Add the Splash Effect here */}
       {/* <WaterSplash /> */}
 
-      
-      
+
+
 
       {/* --- 1. ABSTRACT BACKGROUND SHAPES --- */}
       <BackgroundShapes />
 
 
       {/* --- 2. HERO CONTENT --- */}
-      <Hero />
+      <HeroSection
+        tag="ROBOTICS STUDIO"
+        title="Automating One Bot"
+        subTitle="At a Time."
+        description="Yantrika is a robotics production studio that brings your ideas to life through autonomous precision and intelligent design."
+      />
 
       <Sponsors />
       <Events />
