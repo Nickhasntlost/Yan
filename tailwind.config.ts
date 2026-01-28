@@ -18,6 +18,7 @@ const config: Config = {
                 heading: ["var(--font-poppins)", "system-ui", "sans-serif"],
             },
         },
+
     },
     plugins: [],
 };

@@ -140,7 +140,7 @@ export default function CoreTeamPage() {
     }, [selectedMember]);
 
     return (
-        <main className="relative w-full min-h-screen bg-background text-foreground selection:bg-blue-500/30 font-sans transition-colors duration-300">
+        <main className="relative w-full min-h-screen bg-background text-foreground selection:bg-blue-500/30 font-sans transition-colors duration-300 pt-32">
             <BackgroundShapes />
 
             {/* Cinematic Grain Overlay */}

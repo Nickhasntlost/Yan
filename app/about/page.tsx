@@ -118,7 +118,7 @@ const Counter = ({ value, suffix = "" }: { value: number; suffix?: string }) => 
 export default function About() {
     const [activeHistory, setActiveHistory] = useState(0);
     return (
-        <main className="relative w-full bg-background text-foreground font-sans selection:bg-blue-500/30 overflow-hidden">
+        <main className="relative w-full bg-background text-foreground font-sans selection:bg-blue-500/30 overflow-hidden pt-32">
 
             {/* Background Elements */}
             <BackgroundShapes />

@@ -38,7 +38,7 @@ export default function HeroSection({
     scrollText = "SCROLL TO EXPLORE"
 }: HeroSectionProps) {
     return (
-        <section className="relative pt-38 pb-20 px-6 md:px-12 max-w-[1400px] mx-auto min-h-[80vh] flex flex-col justify-center">
+        <section className="relative pt-30 pb-40 px-6 md:px-15 max-w-[1400px] mx-auto min-h-[80vh] flex flex-col justify-center">
             <motion.div
                 initial="hidden"
                 animate="visible"

@@ -72,7 +72,7 @@ const ContactInfoItem = ({ icon: Icon, title, content, delay }: any) => (
 
 export default function Contact() {
     return (
-        <main className="relative w-full min-h-screen bg-background text-foreground font-sans selection:bg-blue-500/30 overflow-hidden">
+        <main className="relative w-full min-h-screen bg-background text-foreground font-sans selection:bg-blue-500/30 overflow-hidden pt-32">
             <BackgroundShapes />
 
             {/* HERO SECTION */}
