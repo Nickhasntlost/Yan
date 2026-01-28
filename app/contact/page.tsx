@@ -1,50 +1,54 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import BackgroundShapes from "@/components/home/BackgroundShapes";
-import { motion, Variants } from "framer-motion";
-import { Mail, MapPin, Phone, Send, ArrowRight } from "lucide-react";
+import { motion, Variants, AnimatePresence } from "framer-motion";
+import { Mail, MapPin, Phone, Send, ArrowRight, CheckCircle, XCircle } from "lucide-react";
 import HeroSection from "@/components/ui/HeroSection";
 
-// --- ANIMATION VARIANTS ---
+/* ---------------- ANIMATIONS ---------------- */
+
 const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-    }
+        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    },
 };
 
-const staggerContainer: Variants = {
-    hidden: {},
-    visible: {
-        transition: {
-            staggerChildren: 0.1,
-            delayChildren: 0.2
-        }
-    }
-};
+/* ---------------- INPUT COMPONENT ---------------- */
 
-// --- COMPONENTS ---
-
-const ContactInput = ({ label, type = "text", placeholder, textarea = false }: any) => {
+const ContactInput = ({
+    label,
+    type = "text",
+    placeholder,
+    textarea = false,
+    value,
+    onChange,
+}: any) => {
     return (
         <div className="mb-5 last:mb-0">
-            {/* ALIGNMENT FIX: Removed ml-1 to align label flush with input border */}
             <label className="block text-[11px] font-bold tracking-[0.15em] text-gray-400 uppercase mb-2">
                 {label}
             </label>
+
             {textarea ? (
                 <textarea
                     rows={5}
                     placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
+                    required
                     className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-4 text-base text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 transition-all resize-none"
                 />
             ) : (
                 <input
                     type={type}
                     placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
+                    required
                     className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-4 text-base text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 transition-all"
                 />
             )}
@@ -52,25 +56,67 @@ const ContactInput = ({ label, type = "text", placeholder, textarea = false }: a
     );
 };
 
+/* ---------------- INFO CARD ---------------- */
+
 const ContactInfoItem = ({ icon: Icon, title, content, delay }: any) => (
     <motion.div
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ delay, duration: 0.6 }}
-        // ALIGNMENT FIX: Reduced padding slightly to keep it tight, added min-height
-        className="flex items-center gap-6 p-6 rounded-2xl bg-white/50 dark:bg-white/5 border border-gray-100 dark:border-white/5 hover:bg-white dark:hover:bg-white/10 transition-all group shadow-sm hover:shadow-md"
+        className="flex items-center gap-6 p-6 rounded-2xl bg-white/50 dark:bg-white/5 border border-gray-100 dark:border-white/5 shadow-sm"
     >
-        <div className="flex-shrink-0 p-3 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+        <div className="p-3 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
             <Icon className="w-5 h-5" />
         </div>
         <div>
-            <h4 className="text-[10px] font-bold tracking-widest text-gray-400 uppercase mb-1">{title}</h4>
-            <p className="text-lg font-medium text-gray-900 dark:text-white leading-none">{content}</p>
+            <h4 className="text-[10px] font-bold tracking-widest text-gray-400 uppercase mb-1">
+                {title}
+            </h4>
+            <p className="text-lg font-medium text-gray-900 dark:text-white">
+                {content}
+            </p>
         </div>
     </motion.div>
 );
 
+/* ---------------- MAIN PAGE ---------------- */
+
 export default function Contact() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [status, setStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: "" });
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setStatus({ type: null, message: "" });
+
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, message }),
+            });
+
+            if (res.ok) {
+                setStatus({ type: 'success', message: "Message sent successfully!" });
+                setName("");
+                setEmail("");
+                setMessage("");
+                // Auto dismiss after 5 seconds
+                setTimeout(() => setStatus({ type: null, message: "" }), 5000);
+            } else {
+                setStatus({ type: 'error', message: "Failed to send message." });
+            }
+        } catch (error) {
+            setStatus({ type: 'error', message: "Something went wrong." });
+        }
+
+        setLoading(false);
+    };
+
     return (
         <main className="relative w-full min-h-screen bg-background text-foreground font-sans selection:bg-blue-500/30 overflow-hidden pt-32">
             <BackgroundShapes />
@@ -85,7 +131,6 @@ export default function Contact() {
 
             {/* MAIN CONTENT SPLIT */}
             <section className="relative pb-32 px-6 md:px-12 max-w-[1400px] mx-auto z-10">
-                {/* ALIGNMENT FIX: items-start allows independent heights, gap-24 is the 'pro' spacing */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
 
                     {/* LEFT: FORM CONTAINER */}
@@ -102,18 +147,36 @@ export default function Contact() {
                         <div className="relative z-10">
                             <h3 className="text-2xl md:text-3xl font-bold mb-8">Send a Message</h3>
 
-                            <form onSubmit={(e) => e.preventDefault()} className="space-y-2">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-                                    <ContactInput label="First Name" placeholder="Jane" />
-                                    <ContactInput label="Last Name" placeholder="Doe" />
-                                </div>
-                                <ContactInput label="Email" type="email" placeholder="jane@example.com" />
-                                <ContactInput label="Subject" placeholder="Project Inquiry" />
-                                <ContactInput label="Message" textarea placeholder="Tell us about your project..." />
+                            <form onSubmit={handleSubmit} className="space-y-2">
+                                <ContactInput
+                                    label="Name"
+                                    placeholder="Jane Doe"
+                                    value={name}
+                                    onChange={(e: any) => setName(e.target.value)}
+                                />
+
+                                <ContactInput
+                                    label="Email"
+                                    type="email"
+                                    placeholder="jane@example.com"
+                                    value={email}
+                                    onChange={(e: any) => setEmail(e.target.value)}
+                                />
+
+                                <ContactInput
+                                    label="Message"
+                                    textarea
+                                    placeholder="Tell us about your project..."
+                                    value={message}
+                                    onChange={(e: any) => setMessage(e.target.value)}
+                                />
 
                                 <div className="pt-6">
-                                    <button className="w-full bg-[#111] dark:bg-white text-white dark:text-black font-bold tracking-widest uppercase py-4 rounded-xl hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-3 group shadow-lg">
-                                        Send Message
+                                    <button
+                                        disabled={loading}
+                                        className="w-full bg-[#111] dark:bg-white text-white dark:text-black font-bold tracking-widest uppercase py-4 rounded-xl hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-3 group shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                                    >
+                                        {loading ? "Sending..." : "Send Message"}
                                         <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                     </button>
                                 </div>
@@ -122,7 +185,6 @@ export default function Contact() {
                     </motion.div>
 
                     {/* RIGHT: INFO & MAP */}
-                    {/* ALIGNMENT FIX: Removed padding-top so Top of Form aligns with Top of Info */}
                     <div className="flex flex-col h-full justify-between gap-8">
 
                         {/* INFO CARDS STACK */}
@@ -148,7 +210,6 @@ export default function Contact() {
                         </div>
 
                         {/* MAP PREVIEW */}
-                        {/* ALIGNMENT FIX: Increased height to visually balance the tall form on the left */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
@@ -169,6 +230,30 @@ export default function Contact() {
 
                 </div>
             </section>
+
+            {/* TOAST NOTIFICATION */}
+            <AnimatePresence>
+                {status.type && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 50, scale: 0.9 }}
+                        className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 px-6 py-4 rounded-2xl shadow-2xl backdrop-blur-xl border ${status.type === 'success'
+                                ? "bg-green-500/10 border-green-500/20 text-green-600 dark:text-green-400"
+                                : "bg-red-500/10 border-red-500/20 text-red-600 dark:text-red-400"
+                            }`}
+                    >
+                        <div className={`p-2 rounded-full ${status.type === 'success' ? "bg-green-500/20" : "bg-red-500/20"}`}>
+                            {status.type === 'success' ? <CheckCircle className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
+                        </div>
+                        <div>
+                            <h4 className="font-bold text-sm uppercase tracking-wider">{status.type === 'success' ? "Success" : "Error"}</h4>
+                            <p className="text-sm font-medium opacity-90">{status.message}</p>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </main>
     );
 }
+
