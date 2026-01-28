@@ -39,7 +39,7 @@ const coreTeam = [
         id: "member-2",
         name: "Yash Padhen",
         role: "Vice Captain",
-        department: "Systems Eng.",
+        department: "Information Technology",
         image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop",
         bio: "The operational architect ensuring mechanical precision meets software logic. Expert in structural dynamics and team synchronization.",
         socials: { linkedin: "#", github: "#", mail: "jay@yantrika.com" },
@@ -47,9 +47,9 @@ const coreTeam = [
     },
     {
         id: "member-3",
-        name: "Soham Patel",
-        role: "Tech Lead",
-        department: "Mechanical",
+        name: "Nikhil Solanke",
+        role: "Manager",
+        department: "Computer Science",
         image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop",
         bio: "Master of kinetics. Designing unyielding chassis systems that survive the harshest competitive arenas.",
         socials: { linkedin: "#", github: "#" },
@@ -57,8 +57,8 @@ const coreTeam = [
     },
     {
         id: "member-4",
-        name: "Sarah Chen",
-        role: "AI Research",
+        name: "Siddharth Dongardive",
+        role: "Deputy Manager",
         department: "Data Science",
         image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop",
         bio: "Architecting the neural pathways of our robots. Specializes in SLAM algorithms and real-time computer vision.",
@@ -67,9 +67,9 @@ const coreTeam = [
     },
     {
         id: "member-5",
-        name: "Marcus Al-Fayed",
-        role: "Software Architect",
-        department: "Computer Science",
+        name: "Bhavya Damani",
+        role: "PR Head",
+        department: "Artificial Intelligence",
         image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop",
         bio: "Full-stack developer turning raw sensor data into actionable intelligence. Creator of the Yantrika Telemetry Dashboard.",
         socials: { linkedin: "#", github: "#" },
@@ -77,9 +77,29 @@ const coreTeam = [
     },
     {
         id: "member-6",
-        name: "Elena Rodriguez",
-        role: "Outreach Lead",
-        department: "Electronics",
+        name: "Vedant Mhatre",
+        role: "Technical Head",
+        department: "Artificial Intelligence",
+        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop",
+        bio: "Full-stack developer turning raw sensor data into actionable intelligence. Creator of the Yantrika Telemetry Dashboard.",
+        socials: { linkedin: "#", github: "#" },
+        stats: { exp: "03", projects: "08", awards: "06" }
+    },
+    {
+        id: "member-7",
+        name: "Eshika Agarwal",
+        role: "Finance Head",
+        department: "Data Science",
+        image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop",
+        bio: "Bridging the gap between complex robotics and the community. Managing sponsorships and inspiring the next generation.",
+        socials: { linkedin: "#", mail: "elena@yantrika.com" },
+        stats: { exp: "01", projects: "15", awards: "01" }
+    },
+    {
+        id: "member-8",
+        name: "Taniksha Desale",
+        role: "Documentation Head",
+        department: "Data Science",
         image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop",
         bio: "Bridging the gap between complex robotics and the community. Managing sponsorships and inspiring the next generation.",
         socials: { linkedin: "#", mail: "elena@yantrika.com" },
@@ -157,9 +177,11 @@ export default function CoreTeamPage() {
             />
 
             {/* 2. GALLERY GRID */}
-            <section className="relative px-6 pb-40 z-10">
-                <div className="max-w-[1136px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                    {coreTeam.map((member) => (
+            <section className="relative px-6 pb-40 z-10 space-y-12"> {/* Added space-y-12 for separation */}
+
+                {/* LEADERSHIP ROW (First 2 Members) */}
+                <div className="max-w-[850px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                    {coreTeam.slice(0, 2).map((member) => (
                         <TiltCard
                             key={member.id}
                             layoutId={`card-${member.id}`}
@@ -180,11 +202,53 @@ export default function CoreTeamPage() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent dark:from-black dark:via-black/20 dark:to-transparent opacity-90 group-hover:opacity-60 transition-opacity duration-500" />
 
                                 {/* Floating Info */}
-                                <div className="absolute bottom-0 left-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                <div className="absolute bottom-0 left-0 w-full p-5 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                     <motion.p layoutId={`role-${member.id}`} className="text-blue-600 dark:text-blue-400 font-mono text-xs uppercase tracking-widest mb-2">
                                         {member.role}
                                     </motion.p>
-                                    <motion.h3 layoutId={`name-${member.id}`} className="text-4xl font-bold text-zinc-900 dark:text-white mb-2">
+                                    <motion.h3 layoutId={`name-${member.id}`} className="text-xl md:text-[26px] font-bold text-zinc-900 dark:text-white mb-1 whitespace-nowrap tracking-tight">
+                                        {member.name}
+                                    </motion.h3>
+                                    <div className="h-[1px] w-0 group-hover:w-full bg-zinc-900/30 dark:bg-white/30 transition-all duration-700 ease-out" />
+                                </div>
+
+                                {/* Top Right Icon */}
+                                <div className="absolute top-6 right-6 w-12 h-12 rounded-full border border-black/10 dark:border-white/20 flex items-center justify-center bg-white/50 dark:bg-black/20 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">
+                                    <ArrowUpRight className="w-5 h-5" />
+                                </div>
+                            </motion.div>
+                        </TiltCard>
+                    ))}
+                </div>
+
+                {/* MEMBERS GRID (Remaining Members) */}
+                <div className="max-w-[1136px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                    {coreTeam.slice(2).map((member) => (
+                        <TiltCard
+                            key={member.id}
+                            layoutId={`card-${member.id}`}
+                            onClick={() => setSelectedMember(member)}
+                            className="h-[500px] perspective-1000"
+                        >
+                            <motion.div
+                                layoutId={`image-container-${member.id}`}
+                                className="absolute inset-0 bg-white dark:bg-[#0a0a0a] rounded-[2rem] overflow-hidden border border-zinc-200 dark:border-white/5 group-hover:border-zinc-300 dark:group-hover:border-white/20 transition-colors duration-500 shadow-xl dark:shadow-none"
+                            >
+                                <Image
+                                    src={member.image}
+                                    alt={member.name}
+                                    fill
+                                    className="object-cover opacity-90 dark:opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 grayscale group-hover:grayscale-0"
+                                    unoptimized
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent dark:from-black dark:via-black/20 dark:to-transparent opacity-90 group-hover:opacity-60 transition-opacity duration-500" />
+
+                                {/* Floating Info */}
+                                <div className="absolute bottom-0 left-0 w-full p-5 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                    <motion.p layoutId={`role-${member.id}`} className="text-blue-600 dark:text-blue-400 font-mono text-xs uppercase tracking-widest mb-2">
+                                        {member.role}
+                                    </motion.p>
+                                    <motion.h3 layoutId={`name-${member.id}`} className="text-xl md:text-[26px] font-bold text-zinc-900 dark:text-white mb-1 whitespace-nowrap tracking-tight">
                                         {member.name}
                                     </motion.h3>
                                     <div className="h-[1px] w-0 group-hover:w-full bg-zinc-900/30 dark:bg-white/30 transition-all duration-700 ease-out" />
@@ -199,6 +263,7 @@ export default function CoreTeamPage() {
                     ))}
                 </div>
             </section>
+
 
             {/* 3. EXPANDED MODAL */}
             <AnimatePresence>
@@ -261,7 +326,7 @@ export default function CoreTeamPage() {
                                             {selectedMember.name}
                                         </motion.h2>
 
-                                        <p className="text-xl text-zinc-500 dark:text-white/40 font-light mb-12">{selectedMember.department}</p>
+                                        <p className="text-4xl text-zinc-500 dark:text-white/40 font-light mb-12">{selectedMember.department}</p>
 
                                         <div className="grid grid-cols-3 gap-8 mb-12 border-y border-zinc-100 dark:border-white/5 py-10">
                                             <div>
