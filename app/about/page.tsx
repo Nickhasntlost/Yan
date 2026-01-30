@@ -275,26 +275,36 @@ export default function About() {
                     <div className="absolute top-[-50%] right-[-10%] w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
 
                     <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
-                        <div className="w-48 h-48 md:w-64 md:h-64 flex-shrink-0 relative rounded-full overflow-hidden border-4 border-gray-50 dark:border-gray-800 shadow-lg">
-                            <Image
-                                src="https://placehold.co/400x400/2563eb/white?text=Faculty"
-                                alt="Dr. Ananya Sharma"
-                                fill
-                                className="object-cover"
-                                unoptimized // <--- FIXED: Allows external SVGs to load
-                            />
-                        </div>
+<div className="w-48 h-48 md:w-64 md:h-64 flex-shrink-0 relative rounded-full overflow-hidden border-4 border-gray-50 dark:border-gray-800 shadow-lg">
+    <Image
+        src="https://placehold.co/400x400/2563eb/white?text=Faculty"
+        alt="Ms. Shaista Khan"
+        fill
+        className="object-cover"
+        unoptimized
+    />
+</div>
 
-                        <div className="text-center md:text-left">
-                            <h2 className="text-xs font-bold tracking-widest text-blue-600 uppercase mb-3">Faculty Mentor</h2>
-                            <h3 className="text-3xl md:text-5xl font-medium mb-6">Dr. Ananya Sharma</h3>
-                            <p className="text-lg md:text-xl text-gray-500 italic mb-6">
-                                "Innovation is not just about building robots; it's about building the minds that build the robots."
-                            </p>
-                            <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-xl mx-auto md:mx-0">
-                                With over 15 years of experience in AI and Embedded Systems, Dr. Sharma guides Yantrika's technical direction, ensuring our projects are computationally intelligent and ethically sound.
-                            </p>
-                        </div>
+<div className="text-center md:text-left">
+    <h2 className="text-xs font-bold tracking-widest text-blue-600 uppercase mb-3">
+        Faculty Mentor
+    </h2>
+
+    <h3 className="text-3xl md:text-5xl font-medium mb-6">
+        Ms. Shaista Khan
+    </h3>
+
+    <p className="text-lg md:text-xl text-gray-500 italic mb-6">
+        "Engineering education is about nurturing curiosity, discipline, and the confidence to solve real-world problems."
+    </p>
+
+    <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-xl mx-auto md:mx-0">
+        Ms. Shaista Khan is a faculty member in the Department of Electronics and Telecommunication Engineering at VCET. 
+        She mentors students in electronics, communication systems, and applied engineering projects, emphasizing strong 
+        fundamentals, practical implementation, and responsible innovation.
+    </p>
+</div>
+
                     </div>
                 </motion.div>
             </section>

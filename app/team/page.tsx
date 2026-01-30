@@ -32,7 +32,7 @@ const coreTeam = [
         department: "Computer Science",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
         bio: "Visionary leader orchestrating the convergence of hardware and software. Leading the charge in autonomous systems with a focus on embedded resilience.",
-        socials: { linkedin: "#", github: "#", mail: "jainam@yantrika.com" },
+        socials: { linkedin: "#", github: "#", mail: "yantrika@vcet.edu.in" },
         stats: { exp: "03", projects: "12", awards: "05" }
     },
     {
@@ -42,7 +42,7 @@ const coreTeam = [
         department: "Information Technology",
         image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop",
         bio: "The operational architect ensuring mechanical precision meets software logic. Expert in structural dynamics and team synchronization.",
-        socials: { linkedin: "#", github: "#", mail: "jay@yantrika.com" },
+        socials: { linkedin: "#", github: "#", mail: "yantrika@vcet.edu.in" },
         stats: { exp: "02", projects: "09", awards: "03" }
     },
     {
@@ -92,7 +92,7 @@ const coreTeam = [
         department: "Data Science",
         image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop",
         bio: "Bridging the gap between complex robotics and the community. Managing sponsorships and inspiring the next generation.",
-        socials: { linkedin: "#", mail: "elena@yantrika.com" },
+        socials: { linkedin: "#", mail: "yantrika@vcet.edu.in" },
         stats: { exp: "01", projects: "15", awards: "01" }
     },
     {
@@ -102,7 +102,7 @@ const coreTeam = [
         department: "Data Science",
         image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop",
         bio: "Bridging the gap between complex robotics and the community. Managing sponsorships and inspiring the next generation.",
-        socials: { linkedin: "#", mail: "elena@yantrika.com" },
+        socials: { linkedin: "#", mail: "yantrika@vcet.edu.in" },
         stats: { exp: "01", projects: "15", awards: "01" }
     }
 ];

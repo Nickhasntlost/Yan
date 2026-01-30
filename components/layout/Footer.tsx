@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Footer() {
     return (
@@ -20,11 +21,17 @@ export default function Footer() {
                     <div>
                         <h3 className="text-sm font-semibold uppercase tracking-wider mb-6 text-gray-400 dark:text-gray-500">Menu</h3>
                         <ul className="space-y-4">
-                            {['Home', 'About Us', 'Projects', 'Events', 'Contact'].map((item) => (
-                                <li key={item}>
-                                    <a href="#" className="text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm font-medium">
-                                        {item}
-                                    </a>
+                            {[
+                                { name: 'Home', href: '/' },
+                                { name: 'About Us', href: '/about' },
+                                { name: 'Projects', href: '/projects' },
+                                { name: 'Team', href: '/team' },
+                                { name: 'Contact', href: '/contact' }
+                            ].map((item) => (
+                                <li key={item.name}>
+                                    <Link href={item.href} className="text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm font-medium">
+                                        {item.name}
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -34,10 +41,14 @@ export default function Footer() {
                     <div>
                         <h3 className="text-sm font-semibold uppercase tracking-wider mb-6 text-gray-400 dark:text-gray-500">Connect</h3>
                         <ul className="space-y-4">
-                            {['Instagram', 'LinkedIn', 'GitHub', 'Discord'].map((item) => (
-                                <li key={item}>
-                                    <a href="#" className="text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm font-medium flex items-center gap-2">
-                                        {item}
+                            {[
+                                { name: 'Instagram', url: 'https://www.instagram.com/vcet_yantrika/' },
+                                { name: 'LinkedIn', url: 'https://www.linkedin.com/in/yantrika-vcet-484068291/' },
+                                { name: 'GitHub', url: 'https://github.com/yantrika' }
+                            ].map((item) => (
+                                <li key={item.name}>
+                                    <a href={item.url} target={['Instagram', 'LinkedIn', 'GitHub'].includes(item.name) ? "_blank" : "_self"} rel={['Instagram', 'LinkedIn', 'GitHub'].includes(item.name) ? "noopener noreferrer" : ""} className="text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm font-medium flex items-center gap-2">
+                                        {item.name}
                                         <span className="text-xs">↗</span>
                                     </a>
                                 </li>

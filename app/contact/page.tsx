@@ -192,19 +192,19 @@ export default function Contact() {
                             <ContactInfoItem
                                 icon={Mail}
                                 title="Email Us"
-                                content="hello@yantrika.robotics"
+                                content="yantrika@vcet.edu.in"
                                 delay={0.1}
                             />
                             <ContactInfoItem
                                 icon={Phone}
                                 title="Call Us"
-                                content="+91 98765 43210"
+                                content="+91 87678 31635"
                                 delay={0.2}
                             />
                             <ContactInfoItem
                                 icon={MapPin}
-                                title="Visit HQ"
-                                content="Innovation Hub, Block C"
+                                title="Visit Us"
+                                content="Innovation Lab, VCET"
                                 delay={0.3}
                             />
                         </div>
@@ -239,8 +239,8 @@ export default function Contact() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 50, scale: 0.9 }}
                         className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 px-6 py-4 rounded-2xl shadow-2xl backdrop-blur-xl border ${status.type === 'success'
-                                ? "bg-green-500/10 border-green-500/20 text-green-600 dark:text-green-400"
-                                : "bg-red-500/10 border-red-500/20 text-red-600 dark:text-red-400"
+                            ? "bg-green-500/10 border-green-500/20 text-green-600 dark:text-green-400"
+                            : "bg-red-500/10 border-red-500/20 text-red-600 dark:text-red-400"
                             }`}
                     >
                         <div className={`p-2 rounded-full ${status.type === 'success' ? "bg-green-500/20" : "bg-red-500/20"}`}>
