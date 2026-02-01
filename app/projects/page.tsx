@@ -230,6 +230,7 @@ export default function Projects() {
                 title="Engineering the"
                 subTitle="Impossible."
                 description="Explore our latest innovations, from destructive combat bots to life-saving autonomous drones."
+                compact={true}
             />
 
             {/* PROJECTS GRID */}

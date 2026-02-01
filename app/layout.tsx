@@ -18,6 +18,13 @@ const poppins = Poppins({
 export const metadata = {
   title: "Yantrika",
   description: "Robotics Club",
+  icons: {
+    icon: [
+      { url: '/Yan.png', sizes: '32x32', type: 'image/png' },
+      { url: '/Yan.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: '/Yan.png', // 180x180 for Apple devices
+  },
 };
 
 export default function RootLayout({

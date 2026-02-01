@@ -127,6 +127,7 @@ export default function Contact() {
                 title="Let's Build the"
                 subTitle="Future Together."
                 description="Whether you're looking to collaborate, join the club, or just want to talk robotics — our channels are open."
+                compact={true}
             />
 
             {/* MAIN CONTENT SPLIT */}

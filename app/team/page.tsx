@@ -174,6 +174,7 @@ export default function CoreTeamPage() {
                 subTitle="Leadership"
                 description="We are the engineers of the impossible. A collective of visionaries building the autonomous future, one line of code and one servo at a time."
                 scrollText="SCROLL TO EXPLORE"
+                compact={true}
             />
 
             {/* 2. GALLERY GRID */}

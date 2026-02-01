@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion, Variants } from "framer-motion";
 
 const fadeInUp: Variants = {
@@ -28,6 +28,7 @@ interface HeroSectionProps {
     subTitle: React.ReactNode;
     description: string;
     scrollText?: string;
+    compact?: boolean;
 }
 
 export default function HeroSection({
@@ -35,10 +36,24 @@ export default function HeroSection({
     title,
     subTitle,
     description,
-    scrollText = "SCROLL TO EXPLORE"
+    scrollText = "SCROLL TO EXPLORE",
+    compact = false
 }: HeroSectionProps) {
+    const [isVisible, setIsVisible] = useState(true);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsVisible(window.scrollY < 100);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
     return (
-        <section className="relative pt-30 pb-40 px-6 md:px-15 max-w-[1400px] mx-auto min-h-[80vh] flex flex-col justify-center">
+        <section className={`relative px-6 md:px-15 max-w-[1400px] mx-auto flex flex-col justify-center ${compact
+            ? "pt-10 pb-20 h-[calc(100vh-128px)]"
+            : "pt-30 pb-40 min-h-[80vh]"
+            }`}>
             <motion.div
                 initial="hidden"
                 animate="visible"
@@ -72,11 +87,23 @@ export default function HeroSection({
             {/* Floating "Scroll Down" Indicator */}
             <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-12 left-6 md:left-12 flex items-center gap-4 text-xs font-bold tracking-widest text-gray-400 font-sans"
+                animate={{ opacity: isVisible ? 1 : 0 }}
+                transition={{ delay: isVisible ? 3 : 0, duration: 0.5 }}
+                className={`absolute left-1/2 -translate-x-1/2 flex items-center gap-4 text-xs font-bold tracking-widest text-gray-400 font-sans ${compact ? "bottom-8" : "bottom-25"
+                    }`}
             >
-                {scrollText}
+                <div className="h-px w-12 bg-gray-300 dark:bg-gray-700"></div>
+                <motion.span
+                    animate={{ y: isVisible ? [0, 3, 0] : 0 }}
+                    transition={{
+                        delay: isVisible ? 3 : 0,
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                >
+                    {scrollText}
+                </motion.span>
                 <div className="h-px w-12 bg-gray-300 dark:bg-gray-700"></div>
             </motion.div>
         </section>

@@ -44,10 +44,10 @@ export default function Home() {
 
       {/* --- 2. HERO CONTENT --- */}
       <HeroSection
-        tag="ROBOTICS STUDIO"
+        tag="ROBOTICS CLUB"
         title="Automating One Bot"
         subTitle="At a Time."
-        description="Yantrika is a robotics production studio that brings your ideas to life through autonomous precision and intelligent design."
+        description="Empowering students to explore, build, and innovate with Robotics."
       />
 
       <Sponsors />
