@@ -23,89 +23,18 @@ import {
 import BackgroundShapes from "@/components/home/BackgroundShapes";
 import HeroSection from "@/components/ui/HeroSection";
 
-// --- RANDOMIZED HIGH-QUALITY DATA ---
-const coreTeam = [
-    {
-        id: "member-1",
-        name: "Soham Sawant",
-        role: "Captain",
-        department: "Computer Science",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
-        bio: "Visionary leader orchestrating the convergence of hardware and software. Leading the charge in autonomous systems with a focus on embedded resilience.",
-        socials: { linkedin: "#", github: "#", mail: "yantrika@vcet.edu.in" },
-        stats: { exp: "03", projects: "12", awards: "05" }
-    },
-    {
-        id: "member-2",
-        name: "Yash Padhen",
-        role: "Vice Captain",
-        department: "Information Technology",
-        image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop",
-        bio: "The operational architect ensuring mechanical precision meets software logic. Expert in structural dynamics and team synchronization.",
-        socials: { linkedin: "#", github: "#", mail: "yantrika@vcet.edu.in" },
-        stats: { exp: "02", projects: "09", awards: "03" }
-    },
-    {
-        id: "member-3",
-        name: "Nikhil Solanke",
-        role: "Manager",
-        department: "Computer Science",
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop",
-        bio: "Master of kinetics. Designing unyielding chassis systems that survive the harshest competitive arenas.",
-        socials: { linkedin: "#", github: "#" },
-        stats: { exp: "02", projects: "07", awards: "04" }
-    },
-    {
-        id: "member-4",
-        name: "Siddharth Dongardive",
-        role: "Deputy Manager",
-        department: "Data Science",
-        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop",
-        bio: "Architecting the neural pathways of our robots. Specializes in SLAM algorithms and real-time computer vision.",
-        socials: { linkedin: "#", github: "#" },
-        stats: { exp: "02", projects: "05", awards: "02" }
-    },
-    {
-        id: "member-5",
-        name: "Bhavya Damani",
-        role: "PR Head",
-        department: "Artificial Intelligence",
-        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop",
-        bio: "Full-stack developer turning raw sensor data into actionable intelligence. Creator of the Yantrika Telemetry Dashboard.",
-        socials: { linkedin: "#", github: "#" },
-        stats: { exp: "03", projects: "08", awards: "06" }
-    },
-    {
-        id: "member-6",
-        name: "Vedant Mhatre",
-        role: "Technical Head",
-        department: "Artificial Intelligence",
-        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop",
-        bio: "Full-stack developer turning raw sensor data into actionable intelligence. Creator of the Yantrika Telemetry Dashboard.",
-        socials: { linkedin: "#", github: "#" },
-        stats: { exp: "03", projects: "08", awards: "06" }
-    },
-    {
-        id: "member-7",
-        name: "Eshika Agarwal",
-        role: "Finance Head",
-        department: "Data Science",
-        image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop",
-        bio: "Bridging the gap between complex robotics and the community. Managing sponsorships and inspiring the next generation.",
-        socials: { linkedin: "#", mail: "yantrika@vcet.edu.in" },
-        stats: { exp: "01", projects: "15", awards: "01" }
-    },
-    {
-        id: "member-8",
-        name: "Taniksha Desale",
-        role: "Documentation Head",
-        department: "Data Science",
-        image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop",
-        bio: "Bridging the gap between complex robotics and the community. Managing sponsorships and inspiring the next generation.",
-        socials: { linkedin: "#", mail: "yantrika@vcet.edu.in" },
-        stats: { exp: "01", projects: "15", awards: "01" }
-    }
-];
+// --- TYPE DEFINITION ---
+interface TeamMember {
+    _id?: string;
+    id?: string;
+    name: string;
+    role: string;
+    department: string;
+    image: string;
+    bio: string;
+    socials: { linkedin?: string; github?: string; mail?: string };
+    stats: { exp: string; projects: string; awards: string };
+}
 
 // --- 3D TILT CARD COMPONENT ---
 const TiltCard = ({ children, onClick, layoutId, className }: any) => {
@@ -151,7 +80,14 @@ const TiltCard = ({ children, onClick, layoutId, className }: any) => {
 
 // --- MAIN PAGE ---
 export default function CoreTeamPage() {
-    const [selectedMember, setSelectedMember] = useState<typeof coreTeam[0] | null>(null);
+    const [coreTeam, setCoreTeam] = useState<TeamMember[]>([]);
+    const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+
+    useEffect(() => {
+        fetch("/api/core-team")
+            .then((r) => r.json())
+            .then((data) => setCoreTeam(data));
+    }, []);
 
     // Lock scroll when modal is open
     useEffect(() => {
@@ -184,13 +120,13 @@ export default function CoreTeamPage() {
                 <div className="max-w-[850px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                     {coreTeam.slice(0, 2).map((member) => (
                         <TiltCard
-                            key={member.id}
-                            layoutId={`card-${member.id}`}
+                            key={member._id}
+                            layoutId={`card-${member._id}`}
                             onClick={() => setSelectedMember(member)}
                             className="h-[500px] perspective-1000"
                         >
                             <motion.div
-                                layoutId={`image-container-${member.id}`}
+                                layoutId={`image-container-${member._id}`}
                                 className="absolute inset-0 bg-white dark:bg-[#0a0a0a] rounded-[2rem] overflow-hidden border border-zinc-200 dark:border-white/5 group-hover:border-zinc-300 dark:group-hover:border-white/20 transition-colors duration-500 shadow-xl dark:shadow-none"
                             >
                                 <Image
@@ -204,10 +140,10 @@ export default function CoreTeamPage() {
 
                                 {/* Floating Info */}
                                 <div className="absolute bottom-0 left-0 w-full p-5 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                    <motion.p layoutId={`role-${member.id}`} className="text-blue-600 dark:text-blue-400 font-mono text-xs uppercase tracking-widest mb-2">
+                                    <motion.p layoutId={`role-${member._id}`} className="text-blue-600 dark:text-blue-400 font-mono text-xs uppercase tracking-widest mb-2">
                                         {member.role}
                                     </motion.p>
-                                    <motion.h3 layoutId={`name-${member.id}`} className="text-xl md:text-[26px] font-bold text-zinc-900 dark:text-white mb-1 whitespace-nowrap tracking-tight">
+                                    <motion.h3 layoutId={`name-${member._id}`} className="text-xl md:text-[26px] font-bold text-zinc-900 dark:text-white mb-1 whitespace-nowrap tracking-tight">
                                         {member.name}
                                     </motion.h3>
                                     <div className="h-[1px] w-0 group-hover:w-full bg-zinc-900/30 dark:bg-white/30 transition-all duration-700 ease-out" />
@@ -226,13 +162,13 @@ export default function CoreTeamPage() {
                 <div className="max-w-[1136px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
                     {coreTeam.slice(2).map((member) => (
                         <TiltCard
-                            key={member.id}
-                            layoutId={`card-${member.id}`}
+                            key={member._id}
+                            layoutId={`card-${member._id}`}
                             onClick={() => setSelectedMember(member)}
                             className="h-[500px] perspective-1000"
                         >
                             <motion.div
-                                layoutId={`image-container-${member.id}`}
+                                layoutId={`image-container-${member._id}`}
                                 className="absolute inset-0 bg-white dark:bg-[#0a0a0a] rounded-[2rem] overflow-hidden border border-zinc-200 dark:border-white/5 group-hover:border-zinc-300 dark:group-hover:border-white/20 transition-colors duration-500 shadow-xl dark:shadow-none"
                             >
                                 <Image
@@ -246,10 +182,10 @@ export default function CoreTeamPage() {
 
                                 {/* Floating Info */}
                                 <div className="absolute bottom-0 left-0 w-full p-5 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                    <motion.p layoutId={`role-${member.id}`} className="text-blue-600 dark:text-blue-400 font-mono text-xs uppercase tracking-widest mb-2">
+                                    <motion.p layoutId={`role-${member._id}`} className="text-blue-600 dark:text-blue-400 font-mono text-xs uppercase tracking-widest mb-2">
                                         {member.role}
                                     </motion.p>
-                                    <motion.h3 layoutId={`name-${member.id}`} className="text-xl md:text-[26px] font-bold text-zinc-900 dark:text-white mb-1 whitespace-nowrap tracking-tight">
+                                    <motion.h3 layoutId={`name-${member._id}`} className="text-xl md:text-[26px] font-bold text-zinc-900 dark:text-white mb-1 whitespace-nowrap tracking-tight">
                                         {member.name}
                                     </motion.h3>
                                     <div className="h-[1px] w-0 group-hover:w-full bg-zinc-900/30 dark:bg-white/30 transition-all duration-700 ease-out" />
@@ -280,7 +216,7 @@ export default function CoreTeamPage() {
 
                         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
                             <motion.div
-                                layoutId={`card-${selectedMember.id}`}
+                                layoutId={`card-${selectedMember._id}`}
                                 className="w-full max-w-6xl h-[85vh] bg-white dark:bg-[#0c0c0c] rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-2xl border border-zinc-200 dark:border-white/10 pointer-events-auto relative"
                             >
                                 {/* Close Button */}
@@ -293,7 +229,7 @@ export default function CoreTeamPage() {
 
                                 {/* Left: Image Hero */}
                                 <motion.div
-                                    layoutId={`image-container-${selectedMember.id}`}
+                                    layoutId={`image-container-${selectedMember._id}`}
                                     className="w-full md:w-5/12 h-[40vh] md:h-full relative overflow-hidden"
                                 >
                                     <Image
@@ -308,22 +244,17 @@ export default function CoreTeamPage() {
 
                                 {/* Right: Content */}
                                 <div className="w-full md:w-7/12 p-8 md:p-20 overflow-y-auto bg-white dark:bg-[#0c0c0c] relative">
-                                    {/* Decorative Background Number */}
-                                    <span className="absolute top-4 right-8 text-[12rem] font-bold text-black/[0.02] dark:text-white/[0.02] font-serif leading-none select-none pointer-events-none">
-                                        0{coreTeam.findIndex(m => m.id === selectedMember.id) + 1}
-                                    </span>
-
                                     <motion.div
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: 0.2, duration: 0.5 }}
                                     >
-                                        <motion.span layoutId={`role-${selectedMember.id}`} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 font-mono text-xs uppercase tracking-widest mb-8">
+                                        <motion.span layoutId={`role-${selectedMember._id}`} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 font-mono text-xs uppercase tracking-widest mb-8">
                                             <Cpu className="w-3 h-3" />
                                             {selectedMember.role}
                                         </motion.span>
 
-                                        <motion.h2 layoutId={`name-${selectedMember.id}`} className="text-5xl md:text-7xl font-bold text-zinc-900 dark:text-white mb-4 tracking-tight">
+                                        <motion.h2 layoutId={`name-${selectedMember._id}`} className="text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-900 dark:text-white mb-4 tracking-tight whitespace-nowrap">
                                             {selectedMember.name}
                                         </motion.h2>
 
@@ -331,15 +262,15 @@ export default function CoreTeamPage() {
 
                                         <div className="grid grid-cols-3 gap-8 mb-12 border-y border-zinc-100 dark:border-white/5 py-10">
                                             <div>
-                                                <div className="text-3xl md:text-4xl font-light font-serif mb-1 text-zinc-900 dark:text-white">{selectedMember.stats.exp}+</div>
+                                                <div className="text-3xl md:text-4xl font-light font-serif mb-1 text-zinc-900 dark:text-white">{selectedMember.stats?.exp || "01"}+</div>
                                                 <div className="text-[10px] uppercase tracking-widest text-zinc-400 dark:text-white/40">Years Exp.</div>
                                             </div>
                                             <div>
-                                                <div className="text-3xl md:text-4xl font-light font-serif mb-1 text-zinc-900 dark:text-white">{selectedMember.stats.projects}</div>
+                                                <div className="text-3xl md:text-4xl font-light font-serif mb-1 text-zinc-900 dark:text-white">{selectedMember.stats?.projects || "05"}</div>
                                                 <div className="text-[10px] uppercase tracking-widest text-zinc-400 dark:text-white/40">Projects</div>
                                             </div>
                                             <div>
-                                                <div className="text-3xl md:text-4xl font-light font-serif mb-1 text-zinc-900 dark:text-white">{selectedMember.stats.awards}</div>
+                                                <div className="text-3xl md:text-4xl font-light font-serif mb-1 text-zinc-900 dark:text-white">{selectedMember.stats?.awards || "02"}</div>
                                                 <div className="text-[10px] uppercase tracking-widest text-zinc-400 dark:text-white/40">Awards</div>
                                             </div>
                                         </div>
@@ -349,19 +280,18 @@ export default function CoreTeamPage() {
                                         </motion.p>
 
                                         <div className="flex gap-4">
-                                            {selectedMember.socials.linkedin && (
-                                                <a href={selectedMember.socials.linkedin} className="h-14 px-8 rounded-full border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 flex items-center gap-3 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all group shadow-sm dark:shadow-none">
+                                            {selectedMember.socials?.linkedin && (
+                                                <a href={selectedMember.socials.linkedin} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 flex items-center justify-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
                                                     <Linkedin className="w-5 h-5" />
-                                                    <span className="font-mono text-sm uppercase tracking-wide">Connect</span>
                                                 </a>
                                             )}
-                                            {selectedMember.socials.github && (
-                                                <a href={selectedMember.socials.github} className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                                            {selectedMember.socials?.github && (
+                                                <a href={selectedMember.socials.github} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition-all">
                                                     <Github className="w-5 h-5" />
                                                 </a>
                                             )}
-                                            {selectedMember.socials.mail && (
-                                                <a href={`mailto:${selectedMember.socials.mail}`} className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                                            {selectedMember.socials?.mail && (
+                                                <a href={`mailto:${selectedMember.socials.mail}`} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition-all">
                                                     <Mail className="w-5 h-5" />
                                                 </a>
                                             )}
