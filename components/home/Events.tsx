@@ -21,8 +21,8 @@ export default function Events() {
     return (
         <section className="py-24 px-6 md:px-12 bg-transparent text-foreground relative z-10">
             <div className="max-w-7xl mx-auto">
-                <div className="flex justify-between items-end mb-16 pb-6 border-b border-black/5 dark:border-white/10">
-                    <h2 className="text-3xl md:text-5xl font-light tracking-tight text-black dark:text-white">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-16 pb-4 md:pb-6 border-b border-black/5 dark:border-white/10">
+                    <h2 className="text-2xl md:text-3xl lg:text-5xl font-light tracking-tight text-black dark:text-white mb-2 md:mb-0">
                         Upcoming <span className="text-gray-400 dark:text-gray-600">Events</span>
                     </h2>
                     <span className="hidden md:block text-xs font-mono tracking-widest text-gray-400 uppercase">
@@ -49,7 +49,7 @@ export default function Events() {
                                     0{i + 1} &mdash; {e.type}
                                 </span>
 
-                                <h3 className="text-3xl md:text-4xl font-light tracking-tight text-gray-800 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white transition-colors duration-300">
+                                <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light tracking-tight text-gray-800 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white transition-colors duration-300 text-center md:text-left">
                                     {e.title}
                                 </h3>
 
@@ -58,7 +58,7 @@ export default function Events() {
                                         {e.date}
                                     </span>
                                     {/* Arrow Icon that slides in */}
-                                    <motion.span 
+                                    <motion.span
                                         animate={{ x: hovered === i ? 0 : -10, opacity: hovered === i ? 1 : 0 }}
                                         className="hidden md:block text-black dark:text-white"
                                     >

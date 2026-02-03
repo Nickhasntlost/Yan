@@ -131,7 +131,7 @@ export default function Contact() {
             />
 
             {/* MAIN CONTENT SPLIT */}
-            <section className="relative pb-32 px-6 md:px-12 max-w-[1400px] mx-auto z-10">
+            <section className="relative pb-16 md:pb-32 px-4 md:px-6 lg:px-12 max-w-[1400px] mx-auto z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
 
                     {/* LEFT: FORM CONTAINER */}
@@ -140,13 +140,13 @@ export default function Contact() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="bg-white/80 dark:bg-zinc-900/50 backdrop-blur-2xl border border-gray-200 dark:border-white/5 rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden"
+                        className="bg-white/80 dark:bg-zinc-900/50 backdrop-blur-2xl border border-gray-200 dark:border-white/5 rounded-2xl md:rounded-[2rem] p-6 md:p-8 lg:p-12 shadow-2xl relative overflow-hidden"
                     >
                         {/* Glow effect */}
                         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
 
                         <div className="relative z-10">
-                            <h3 className="text-2xl md:text-3xl font-bold mb-8">Send a Message</h3>
+                            <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-6 md:mb-8">Send a Message</h3>
 
                             <form onSubmit={handleSubmit} className="space-y-2">
                                 <ContactInput
@@ -216,7 +216,7 @@ export default function Contact() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.4, duration: 0.8 }}
-                            className="h-[450px] w-full rounded-[2rem] bg-gray-200 dark:bg-zinc-800 relative overflow-hidden group border border-gray-200 dark:border-zinc-700 shadow-lg"
+                            className="h-[300px] md:h-[400px] lg:h-[450px] w-full rounded-2xl md:rounded-[2rem] bg-gray-200 dark:bg-zinc-800 relative overflow-hidden group border border-gray-200 dark:border-zinc-700 shadow-lg"
                         >
                             <div className="absolute inset-0 bg-[url('https://placehold.co/1200x800/18181b/3f3f46?text=Map+Location')] bg-cover bg-center opacity-60 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"></div>
 

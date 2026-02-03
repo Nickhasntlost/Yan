@@ -56,10 +56,10 @@ export default function Header() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: showLogo ? 1 : 0, y: showLogo ? 0 : -20 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="pointer-events-auto flex items-center gap-4"
+                className="pointer-events-auto flex items-center gap-2 md:gap-4"
             >
-                <img src="/Yan.png" alt="Yantrika Logo" className="h-12 w-auto md:h-18" />
-                <span className="text-4xl font-semibold tracking-[-0.02em] uppercase text-[#050505] dark:text-white">
+                <img src="/Yan.png" alt="Yantrika Logo" className="h-8 w-auto md:h-12 lg:h-18" />
+                <span className="text-xl md:text-2xl lg:text-4xl font-semibold tracking-[-0.02em] uppercase text-[#050505] dark:text-white">
                     YANTRIKA
                 </span>
             </motion.div>
@@ -80,8 +80,8 @@ export default function Header() {
                     />
                 </MagneticButton>
 
-                {/* CTA */}
-                <MagneticButton className="h-11 px-6 bg-[#1F2125] text-white rounded-full flex items-center justify-center text-xs font-bold tracking-wider">
+                {/* CTA - Hidden on small screens */}
+                <MagneticButton className="hidden md:flex h-11 px-6 bg-[#1F2125] text-white rounded-full items-center justify-center text-xs font-bold tracking-wider">
                     LET'S TALK
                 </MagneticButton>
 
@@ -106,7 +106,7 @@ export default function Header() {
                         animate={{ scale: 1, opacity: 1, y: 0 }}
                         exit={{ scale: 0.9, opacity: 0, y: -20 }}
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute top-24 right-6 md:right-10 w-80 bg-white dark:bg-[#050505] border border-gray-100 dark:border-gray-800 rounded-xl shadow-2xl overflow-hidden flex flex-col pointer-events-auto"
+                        className="absolute top-20 md:top-24 right-4 md:right-10 w-[calc(100%-2rem)] md:w-80 bg-white dark:bg-[#050505] border border-gray-100 dark:border-gray-800 rounded-xl shadow-2xl overflow-hidden flex flex-col pointer-events-auto"
                     >
                         <div className="p-4 flex flex-col gap-1">
                             {navLinks.map((link, i) => (

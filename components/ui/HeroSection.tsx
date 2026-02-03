@@ -49,10 +49,11 @@ export default function HeroSection({
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
     return (
-        <section className={`relative px-6 md:px-15 max-w-[1400px] mx-auto flex flex-col justify-center ${compact
-            ? "pt-10 pb-20 h-[calc(100vh-128px)]"
-            : "pt-30 pb-40 min-h-[80vh]"
+        <section className={`relative px-4 md:px-6 lg:px-15 max-w-[1400px] mx-auto flex flex-col justify-center ${compact
+            ? "pt-6 md:pt-10 pb-16 md:pb-20 min-h-[60vh] md:h-[calc(100vh-128px)]"
+            : "pt-20 md:pt-30 pb-32 md:pb-40 min-h-[70vh] md:min-h-[80vh]"
             }`}>
             <motion.div
                 initial="hidden"
@@ -61,8 +62,8 @@ export default function HeroSection({
                 className="max-w-5xl"
             >
                 <motion.div variants={fadeInUp} className="mb-6 flex items-center gap-3">
-                    <span className="h-[1px] w-12 bg-blue-600/50 block"></span>
-                    <span className="text-sm font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400">
+                    <span className="h-[1px] w-8 md:w-12 bg-blue-600/50 block"></span>
+                    <span className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-blue-600 dark:text-blue-400">
                         {tag}
                     </span>
                 </motion.div>
@@ -70,7 +71,7 @@ export default function HeroSection({
                 <div className="overflow-hidden">
                     <motion.h1
                         variants={fadeInUp}
-                        className="text-7xl md:text-8xl font-medium tracking-tighter leading-[1.1] mb-8 font-heading text-zinc-900 dark:text-white"
+                        className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium tracking-tighter leading-[1.1] mb-6 md:mb-8 font-heading text-zinc-900 dark:text-white"
                     >
                         {title} <br />
                         <span className="text-gray-400 dark:text-gray-600 font-light italic">
@@ -79,7 +80,7 @@ export default function HeroSection({
                     </motion.h1>
                 </div>
 
-                <motion.div variants={fadeInUp} className="max-w-2xl text-xl md:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 font-sans">
+                <motion.div variants={fadeInUp} className="max-w-2xl text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-gray-600 dark:text-gray-300 font-sans">
                     {description}
                 </motion.div>
             </motion.div>
@@ -89,10 +90,10 @@ export default function HeroSection({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isVisible ? 1 : 0 }}
                 transition={{ delay: isVisible ? 3 : 0, duration: 0.5 }}
-                className={`absolute left-1/2 -translate-x-1/2 flex items-center gap-4 text-xs font-bold tracking-widest text-gray-400 font-sans ${compact ? "bottom-8" : "bottom-25"
+                className={`absolute left-1/2 -translate-x-1/2 flex items-center gap-2 md:gap-4 text-[10px] md:text-xs font-bold tracking-widest text-gray-400 font-sans ${compact ? "bottom-4 md:bottom-8" : "bottom-16 md:bottom-25"
                     }`}
             >
-                <div className="h-px w-12 bg-gray-300 dark:bg-gray-700"></div>
+                <div className="h-px w-8 md:w-12 bg-gray-300 dark:bg-gray-700"></div>
                 <motion.span
                     animate={{ y: isVisible ? [0, 3, 0] : 0 }}
                     transition={{
@@ -104,7 +105,7 @@ export default function HeroSection({
                 >
                     {scrollText}
                 </motion.span>
-                <div className="h-px w-12 bg-gray-300 dark:bg-gray-700"></div>
+                <div className="h-px w-8 md:w-12 bg-gray-300 dark:bg-gray-700"></div>
             </motion.div>
         </section>
     );

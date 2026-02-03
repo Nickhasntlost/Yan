@@ -26,10 +26,10 @@ export default function Testimonials() {
     const isInView = useInView(ref, { once: true, margin: "-10%" });
 
     return (
-        <section ref={ref} className="py-24 md:py-32 px-6 relative overflow-hidden">
+        <section ref={ref} className="py-16 md:py-24 lg:py-32 px-4 md:px-6 relative overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 {/* Centered Header */}
-                <div className="text-center mb-20">
+                <div className="text-center mb-12 md:mb-20">
                     <motion.span
                         initial={{ opacity: 0, y: 10 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -43,7 +43,7 @@ export default function Testimonials() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-4xl md:text-6xl font-light tracking-tight leading-[1.1] text-black dark:text-white mb-6"
+                        className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-light tracking-tight leading-[1.1] text-black dark:text-white mb-4 md:mb-6"
                     >
                         Voices from the <br className="hidden md:block" />
                         <span className="font-serif italic text-gray-400 dark:text-gray-500">Laboratory.</span>
@@ -53,14 +53,14 @@ export default function Testimonials() {
                         initial={{ opacity: 0 }}
                         animate={isInView ? { opacity: 1 } : {}}
                         transition={{ duration: 1, delay: 0.4 }}
-                        className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-400 font-light leading-relaxed"
+                        className="max-w-2xl mx-auto text-base md:text-lg text-gray-600 dark:text-gray-400 font-light leading-relaxed"
                     >
                         Hear from the engineers, designers, and builders who have found their home in the chaos of creation.
                     </motion.p>
                 </div>
 
                 {/* Grid Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {testimonials.map((t, i) => (
                         <motion.div
                             key={i}
@@ -68,7 +68,7 @@ export default function Testimonials() {
                             animate={isInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.6, delay: 0.2 + (i * 0.1) }}
                             viewport={{ once: true }}
-                            className="group relative flex flex-col justify-between p-8 md:p-10 rounded-[2rem] bg-white dark:bg-white/5 border border-black/5 dark:border-white/10 hover:border-blue-500/20 dark:hover:border-blue-400/20 shadow-sm hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-500"
+                            className="group relative flex flex-col justify-between p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-[2rem] bg-white dark:bg-white/5 border border-black/5 dark:border-white/10 hover:border-blue-500/20 dark:hover:border-blue-400/20 shadow-sm hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-500"
                         >
                             {/* Gradient Overlay on Hover */}
                             <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-blue-500/5 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -80,7 +80,7 @@ export default function Testimonials() {
                                 </div>
 
                                 {/* Quote */}
-                                <p className="text-lg md:text-xl font-medium leading-relaxed text-gray-900 dark:text-gray-100 mb-8">
+                                <p className="text-base md:text-lg lg:text-xl font-medium leading-relaxed text-gray-900 dark:text-gray-100 mb-6 md:mb-8">
                                     {t.quote}
                                 </p>
                             </div>

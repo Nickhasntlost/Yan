@@ -114,16 +114,16 @@ export default function CoreTeamPage() {
             />
 
             {/* 2. GALLERY GRID */}
-            <section className="relative px-6 pb-40 z-10 space-y-12"> {/* Added space-y-12 for separation */}
+            <section className="relative px-4 md:px-6 pb-20 md:pb-40 z-10 space-y-8 md:space-y-12"> {/* Added space-y-12 for separation */}
 
                 {/* LEADERSHIP ROW (First 2 Members) */}
-                <div className="max-w-[850px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <div className="max-w-[850px] mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
                     {coreTeam.slice(0, 2).map((member) => (
                         <TiltCard
                             key={member._id}
                             layoutId={`card-${member._id}`}
                             onClick={() => setSelectedMember(member)}
-                            className="h-[500px] perspective-1000"
+                            className="h-[350px] sm:h-[400px] md:h-[500px] perspective-1000"
                         >
                             <motion.div
                                 layoutId={`image-container-${member._id}`}
@@ -159,13 +159,13 @@ export default function CoreTeamPage() {
                 </div>
 
                 {/* MEMBERS GRID (Remaining Members) */}
-                <div className="max-w-[1136px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                <div className="max-w-[1136px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
                     {coreTeam.slice(2).map((member) => (
                         <TiltCard
                             key={member._id}
                             layoutId={`card-${member._id}`}
                             onClick={() => setSelectedMember(member)}
-                            className="h-[500px] perspective-1000"
+                            className="h-[350px] sm:h-[400px] md:h-[500px] perspective-1000"
                         >
                             <motion.div
                                 layoutId={`image-container-${member._id}`}
@@ -214,10 +214,10 @@ export default function CoreTeamPage() {
                             className="fixed inset-0 bg-white/90 dark:bg-black/90 backdrop-blur-2xl z-50 cursor-pointer"
                         />
 
-                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 md:p-4 pointer-events-none">
                             <motion.div
                                 layoutId={`card-${selectedMember._id}`}
-                                className="w-full max-w-6xl h-[85vh] bg-white dark:bg-[#0c0c0c] rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-2xl border border-zinc-200 dark:border-white/10 pointer-events-auto relative"
+                                className="w-full max-w-6xl h-[90vh] md:h-[85vh] bg-white dark:bg-[#0c0c0c] rounded-2xl md:rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-2xl border border-zinc-200 dark:border-white/10 pointer-events-auto relative"
                             >
                                 {/* Close Button */}
                                 <button
@@ -243,7 +243,7 @@ export default function CoreTeamPage() {
                                 </motion.div>
 
                                 {/* Right: Content */}
-                                <div className="w-full md:w-7/12 p-8 md:p-20 overflow-y-auto bg-white dark:bg-[#0c0c0c] relative">
+                                <div className="w-full md:w-7/12 p-6 md:p-12 lg:p-20 overflow-y-auto bg-white dark:bg-[#0c0c0c] relative">
                                     <motion.div
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
@@ -254,28 +254,28 @@ export default function CoreTeamPage() {
                                             {selectedMember.role}
                                         </motion.span>
 
-                                        <motion.h2 layoutId={`name-${selectedMember._id}`} className="text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-900 dark:text-white mb-4 tracking-tight whitespace-nowrap">
+                                        <motion.h2 layoutId={`name-${selectedMember._id}`} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-900 dark:text-white mb-2 md:mb-4 tracking-tight">
                                             {selectedMember.name}
                                         </motion.h2>
 
-                                        <p className="text-4xl text-zinc-500 dark:text-white/40 font-light mb-12">{selectedMember.department}</p>
+                                        <p className="text-xl md:text-2xl lg:text-4xl text-zinc-500 dark:text-white/40 font-light mb-6 md:mb-12">{selectedMember.department}</p>
 
-                                        <div className="grid grid-cols-3 gap-8 mb-12 border-y border-zinc-100 dark:border-white/5 py-10">
+                                        <div className="grid grid-cols-3 gap-4 md:gap-8 mb-6 md:mb-12 border-y border-zinc-100 dark:border-white/5 py-6 md:py-10">
                                             <div>
-                                                <div className="text-3xl md:text-4xl font-light font-serif mb-1 text-zinc-900 dark:text-white">{selectedMember.stats?.exp || "01"}+</div>
+                                                <div className="text-xl md:text-2xl lg:text-4xl font-light font-serif mb-1 text-zinc-900 dark:text-white">{selectedMember.stats?.exp || "01"}+</div>
                                                 <div className="text-[10px] uppercase tracking-widest text-zinc-400 dark:text-white/40">Years Exp.</div>
                                             </div>
                                             <div>
-                                                <div className="text-3xl md:text-4xl font-light font-serif mb-1 text-zinc-900 dark:text-white">{selectedMember.stats?.projects || "05"}</div>
+                                                <div className="text-xl md:text-2xl lg:text-4xl font-light font-serif mb-1 text-zinc-900 dark:text-white">{selectedMember.stats?.projects || "05"}</div>
                                                 <div className="text-[10px] uppercase tracking-widest text-zinc-400 dark:text-white/40">Projects</div>
                                             </div>
                                             <div>
-                                                <div className="text-3xl md:text-4xl font-light font-serif mb-1 text-zinc-900 dark:text-white">{selectedMember.stats?.awards || "02"}</div>
+                                                <div className="text-xl md:text-2xl lg:text-4xl font-light font-serif mb-1 text-zinc-900 dark:text-white">{selectedMember.stats?.awards || "02"}</div>
                                                 <div className="text-[10px] uppercase tracking-widest text-zinc-400 dark:text-white/40">Awards</div>
                                             </div>
                                         </div>
 
-                                        <motion.p className="text-lg text-zinc-700 dark:text-white/80 leading-relaxed font-light mb-12 max-w-xl">
+                                        <motion.p className="text-base md:text-lg text-zinc-700 dark:text-white/80 leading-relaxed font-light mb-6 md:mb-12 max-w-xl">
                                             {selectedMember.bio}
                                         </motion.p>
 
@@ -314,7 +314,7 @@ export default function CoreTeamPage() {
                         className="flex flex-col items-center"
                     >
                         <Globe className="w-12 h-12 text-blue-500 mb-8 opacity-50" />
-                        <h3 className="text-4xl md:text-5xl font-bold mb-8">Ready to make an impact?</h3>
+                        <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8">Ready to make an impact?</h3>
                         <a href="/contact" className="group relative inline-flex items-center gap-4 px-12 py-5 bg-white text-black rounded-full font-bold text-lg overflow-hidden transition-transform hover:scale-105">
                             <span className="relative z-10">Join the Team</span>
                             <ArrowUpRight className="w-5 h-5 relative z-10 transition-transform group-hover:rotate-45" />

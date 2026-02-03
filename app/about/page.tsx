@@ -133,8 +133,8 @@ export default function About() {
             />
 
             {/* 2. MISSION SECTION */}
-            <section className="relative py-32 px-6 md:px-12 max-w-[1400px] mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+            <section className="relative py-16 md:py-32 px-4 md:px-6 lg:px-12 max-w-[1400px] mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
                     {/* Left: Text Content */}
                     <motion.div
@@ -145,8 +145,8 @@ export default function About() {
                     >
                         <RevealText>
                             <h2 className="text-sm font-bold tracking-widest text-gray-400 uppercase mb-4">01 — Our Mission</h2>
-                            <h3 className="text-4xl md:text-6xl font-medium mb-8 leading-tight">
-                                Automating the <br /> Impossible.
+                            <h3 className="text-3xl md:text-4xl lg:text-6xl font-medium mb-6 md:mb-8 leading-tight">
+                                Automating the <br />Impossible.
                             </h3>
                         </RevealText>
 
@@ -168,7 +168,7 @@ export default function About() {
                     </motion.div>
 
                     {/* Right: Parallax Image */}
-                    <div className="h-[600px] w-full relative">
+                    <div className="h-[400px] md:h-[500px] lg:h-[600px] w-full relative">
                         {/* Blue Glow Behind Image */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-[100px]" />
 
@@ -183,14 +183,14 @@ export default function About() {
             </section>
 
             {/* 3. STATS SECTION */}
-            <section className="relative z-10 -mt-20 px-6 md:px-12 pointer-events-none">
+            <section className="relative z-10 -mt-10 md:-mt-20 px-4 md:px-6 lg:px-12 pointer-events-none">
                 <div className="max-w-[1200px] mx-auto pointer-events-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.8 }}
-                        className="grid grid-cols-2 md:grid-cols-4 bg-white dark:bg-[#111] rounded-[2.5rem] shadow-2xl shadow-blue-900/10 dark:shadow-blue-900/5 overflow-hidden border border-gray-100 dark:border-gray-800"
+                        className="grid grid-cols-2 lg:grid-cols-4 bg-white dark:bg-[#111] rounded-2xl md:rounded-[2.5rem] shadow-2xl shadow-blue-900/10 dark:shadow-blue-900/5 overflow-hidden border border-gray-100 dark:border-gray-800"
                     >
                         {[
                             { label: "Active Members", value: 120, suffix: "+", icon: Users },
@@ -198,8 +198,8 @@ export default function About() {
                             { label: "Awards Won", value: 12, suffix: "", icon: Globe },
                             { label: "Years Running", value: 3, suffix: "", icon: ArrowRight },
                         ].map((stat, i) => (
-                            <div key={i} className="relative p-10 md:p-12 flex flex-col items-center justify-center text-center group border-r border-b md:border-b-0 last:border-r-0 md:last:border-r-0 border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors duration-500">
-                                <div className="mb-6 p-4 rounded-full bg-blue-50 dark:bg-blue-500/10 group-hover:scale-110 group-hover:bg-blue-100 dark:group-hover:bg-blue-500/20 transition-all duration-300">
+                            <div key={i} className="relative p-6 md:p-10 lg:p-12 flex flex-col items-center justify-center text-center group border-r border-b lg:border-b-0 last:border-r-0 lg:last:border-r-0 border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors duration-500">
+                                <div className="mb-4 md:mb-6 p-3 md:p-4 rounded-full bg-blue-50 dark:bg-blue-500/10 group-hover:scale-110 group-hover:bg-blue-100 dark:group-hover:bg-blue-500/20 transition-all duration-300">
                                     <stat.icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                                 </div>
                                 <Counter value={stat.value} suffix={stat.suffix} />
@@ -213,11 +213,11 @@ export default function About() {
 
 
 
-            <section className="relative py-32 px-6 md:px-12 max-w-[1400px] mx-auto z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+            <section className="relative py-16 md:py-32 px-4 md:px-6 lg:px-12 max-w-[1400px] mx-auto z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
                     {/* Left: Dynamic Image Display */}
-                    <div className="h-[500px] w-full relative rounded-2xl overflow-hidden bg-gray-200 dark:bg-zinc-800 shadow-2xl">
+                    <div className="h-[350px] md:h-[400px] lg:h-[500px] w-full relative rounded-2xl overflow-hidden bg-gray-200 dark:bg-zinc-800 shadow-2xl order-2 lg:order-1">
                         {historyData.map((item, index) => (
                             <motion.div
                                 key={index}
@@ -242,7 +242,7 @@ export default function About() {
                     </div>
 
                     {/* Right: Hoverable List */}
-                    <div className="flex flex-col justify-center pl-0 md:pl-12">
+                    <div className="flex flex-col justify-center pl-0 lg:pl-12 order-1 lg:order-2">
                         <span className="text-sm font-bold tracking-widest text-blue-600 uppercase mb-8">01 — Timeline Data</span>
                         <div className="space-y-2">
                             {historyData.map((item, index) => (
@@ -265,18 +265,18 @@ export default function About() {
             </section>
 
             {/* 5. FACULTY MENTOR CARD */}
-            <section className="py-20 px-6 md:px-12 max-w-[1200px] mx-auto">
+            <section className="py-12 md:py-20 px-4 md:px-6 lg:px-12 max-w-[1200px] mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
-                    className="relative bg-white dark:bg-[#111] rounded-3xl p-8 md:p-16 overflow-hidden border border-gray-100 dark:border-gray-800 shadow-2xl"
+                    className="relative bg-white dark:bg-[#111] rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-16 overflow-hidden border border-gray-100 dark:border-gray-800 shadow-2xl"
                 >
                     {/* Internal Blue Glow */}
                     <div className="absolute top-[-50%] right-[-10%] w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
 
                     <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
-                        <div className="w-48 h-48 md:w-64 md:h-64 flex-shrink-0 relative rounded-full overflow-hidden border-4 border-gray-50 dark:border-gray-800 shadow-lg">
+                        <div className="w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 flex-shrink-0 relative rounded-full overflow-hidden border-4 border-gray-50 dark:border-gray-800 shadow-lg">
                             <Image
                                 src="https://placehold.co/400x400/2563eb/white?text=Faculty"
                                 alt="Ms. Shaista Khan"
@@ -291,11 +291,11 @@ export default function About() {
                                 Faculty Mentor
                             </h2>
 
-                            <h3 className="text-3xl md:text-5xl font-medium mb-6">
+                            <h3 className="text-2xl md:text-3xl lg:text-5xl font-medium mb-4 md:mb-6">
                                 Ms. Shaista Khan
                             </h3>
 
-                            <p className="text-lg md:text-xl text-gray-500 italic mb-6">
+                            <p className="text-base md:text-lg lg:text-xl text-gray-500 italic mb-4 md:mb-6">
                                 "Engineering education is about nurturing curiosity, discipline, and the confidence to solve real-world problems."
                             </p>
 
