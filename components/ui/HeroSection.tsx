@@ -29,6 +29,8 @@ interface HeroSectionProps {
     description: string;
     scrollText?: string;
     compact?: boolean;
+    enableGradientHover?: boolean;
+    autoRevealGradient?: boolean;
 }
 
 export default function HeroSection({
@@ -37,9 +39,29 @@ export default function HeroSection({
     subTitle,
     description,
     scrollText = "SCROLL TO EXPLORE",
-    compact = false
+    compact = false,
+    enableGradientHover = false,
+    autoRevealGradient = false
 }: HeroSectionProps) {
     const [isVisible, setIsVisible] = useState(true);
+
+    // For auto-reveal, we want to animate from 0 to 100% after mount
+    const [reveal, setReveal] = useState(false);
+
+    useEffect(() => {
+        if (autoRevealGradient) {
+            // Small delay to ensure transition happens
+            const revealTimer = setTimeout(() => setReveal(true), 100);
+
+            // Hide after 2.5 seconds
+            const hideTimer = setTimeout(() => setReveal(false), 2300);
+
+            return () => {
+                clearTimeout(revealTimer);
+                clearTimeout(hideTimer);
+            };
+        }
+    }, [autoRevealGradient]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -47,7 +69,9 @@ export default function HeroSection({
         };
 
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
 
     return (
@@ -74,9 +98,28 @@ export default function HeroSection({
                         className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium tracking-tighter leading-[1.1] mb-6 md:mb-8 font-heading text-zinc-900 dark:text-white"
                     >
                         {title} <br />
-                        <span className="text-gray-400 dark:text-gray-600 font-light italic">
-                            {subTitle}
-                        </span>
+                        {enableGradientHover ? (
+                            <span className="relative inline-block cursor-default group">
+                                <span className="text-gray-400 dark:text-gray-600 font-light italic">
+                                    {subTitle}
+                                </span>
+                                <span
+                                    className={`absolute left-0 top-0 h-full overflow-hidden transition-[width] duration-1000 ease-in-out whitespace-nowrap ${autoRevealGradient
+                                        ? (reveal ? "w-full" : "w-0 group-hover:w-full")
+                                        : "w-0 group-hover:w-full"
+                                        }`}
+                                    aria-hidden="true"
+                                >
+                                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#b91c1c] to-[#0369a1] font-light italic">
+                                        {subTitle}
+                                    </span>
+                                </span>
+                            </span>
+                        ) : (
+                            <span className="text-gray-400 dark:text-gray-600 font-light italic">
+                                {subTitle}
+                            </span>
+                        )}
                     </motion.h1>
                 </div>
 

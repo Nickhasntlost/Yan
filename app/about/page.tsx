@@ -151,6 +151,7 @@ export default function About() {
                 subTitle={hero.subTitle}
                 description={hero.description}
                 compact={true}
+                enableGradientHover={true}
             />
 
             {/* 2. MISSION SECTION */}

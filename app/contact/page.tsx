@@ -150,6 +150,7 @@ export default function Contact() {
                 subTitle={hero.subTitle}
                 description={hero.description}
                 compact={true}
+                enableGradientHover={true}
             />
 
             {/* MAIN CONTENT SPLIT */}

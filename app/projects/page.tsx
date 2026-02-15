@@ -168,6 +168,7 @@ export default function Projects() {
                 subTitle={config?.projects?.hero?.subTitle || "Impossible."}
                 description={config?.projects?.hero?.description || "Explore our latest innovations, from destructive combat bots to life-saving autonomous drones."}
                 compact={true}
+                enableGradientHover={true}
             />
 
             {/* PROJECTS GRID */}

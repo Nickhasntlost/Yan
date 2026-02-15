@@ -121,6 +121,7 @@ export default function CoreTeamPage() {
                 description={config?.team?.hero?.description || "We are the engineers of the impossible. A collective of visionaries building the autonomous future, one line of code and one servo at a time."}
                 scrollText="SCROLL TO EXPLORE"
                 compact={true}
+                enableGradientHover={true}
             />
 
             {/* 2. GALLERY GRID */}

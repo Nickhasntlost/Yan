@@ -72,6 +72,8 @@ export default function Home() {
         subTitle={heroConfig.subTitle}
         description={heroConfig.description}
         scrollText={heroConfig.scrollText}
+        enableGradientHover={true}
+        autoRevealGradient={true}
       />
 
       <Sponsors sponsors={fullConfig.home?.sponsors} />
