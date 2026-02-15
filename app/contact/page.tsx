@@ -240,13 +240,25 @@ export default function Contact() {
                             transition={{ delay: 0.4, duration: 0.8 }}
                             className="h-[300px] md:h-[400px] lg:h-[450px] w-full rounded-2xl md:rounded-[2rem] bg-gray-200 dark:bg-zinc-800 relative overflow-hidden group border border-gray-200 dark:border-zinc-700 shadow-lg"
                         >
-                            <div className="absolute inset-0 bg-[url('https://placehold.co/1200x800/18181b/3f3f46?text=Map+Location')] bg-cover bg-center opacity-60 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"></div>
+                            <iframe
+                                title="VCET Map"
+                                src="https://maps.google.com/maps?q=Vidyavardhini's%20College%20of%20Engineering%20and%20Technology&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                                className="absolute inset-0 w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100"
+                                frameBorder="0"
+                                scrolling="no"
+                                referrerPolicy="no-referrer-when-downgrade"
+                            ></iframe>
 
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-8">
-                                <div className="flex items-center gap-3 text-xs font-bold text-white tracking-widest">
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-8 pointer-events-none">
+                                <a
+                                    href="https://www.google.com/maps/place/Vidyavardhini's+College+of+Engineering+and+Technology/@19.3838696,72.8287336,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7aec0a4b41bef:0xbd1a4ca919d6a613!8m2!3d19.3838696!4d72.8287336!16zL20vMGNscjgy?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-3 text-xs font-bold text-white tracking-widest pointer-events-auto hover:text-blue-400 transition-colors"
+                                >
                                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                                     OPEN IN GOOGLE MAPS <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-                                </div>
+                                </a>
                             </div>
                         </motion.div>
                     </div>
