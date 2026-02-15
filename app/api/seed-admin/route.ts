@@ -15,8 +15,8 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        const username = "admin";
-        const password = "yantrika$2560"; // Hardcoded initial password as requested
+        const username = "yantrika";
+        const password = "yantrika2560"; 
 
         // Check if admin already exists
         const existingAdmin = await Admin.findOne({ username });
@@ -41,3 +41,6 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }
+
+
+//Invoke-WebRequest -Uri "http://localhost:3000/api/seed-admin?secret=yantrika$2560" -Method POST
