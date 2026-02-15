@@ -80,13 +80,23 @@ const TiltCard = ({ children, onClick, layoutId, className }: any) => {
 
 // --- MAIN PAGE ---
 export default function CoreTeamPage() {
-    const [coreTeam, setCoreTeam] = useState<TeamMember[]>([]);
+    const [coreTeam, setCoreTeam] = useState<any[]>([]);
+    const [config, setConfig] = useState<any>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"]
+    });
     const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
 
     useEffect(() => {
-        fetch("/api/core-team")
-            .then((r) => r.json())
-            .then((data) => setCoreTeam(data));
+        Promise.all([
+            fetch("/api/core-team").then((r) => r.json()),
+            fetch("/api/site-config").then((r) => r.json())
+        ]).then(([teamData, configData]) => {
+            setCoreTeam(teamData);
+            setConfig(configData);
+        });
     }, []);
 
     // Lock scroll when modal is open
@@ -96,7 +106,7 @@ export default function CoreTeamPage() {
     }, [selectedMember]);
 
     return (
-        <main className="relative w-full min-h-screen bg-background text-foreground selection:bg-blue-500/30 font-sans transition-colors duration-300 pt-32">
+        <main ref={containerRef} className="relative w-full min-h-screen bg-background text-foreground selection:bg-blue-500/30 font-sans transition-colors duration-300 pt-32">
             <BackgroundShapes />
 
             {/* Cinematic Grain Overlay */}
@@ -105,10 +115,10 @@ export default function CoreTeamPage() {
 
             {/* 1. HERO SECTION */}
             <HeroSection
-                tag="WHO WE ARE"
-                title="Core"
-                subTitle="Leadership"
-                description="We are the engineers of the impossible. A collective of visionaries building the autonomous future, one line of code and one servo at a time."
+                tag={config?.team?.hero?.tag || "WHO WE ARE"}
+                title={config?.team?.hero?.title || "Core"}
+                subTitle={config?.team?.hero?.subTitle || "Leadership"}
+                description={config?.team?.hero?.description || "We are the engineers of the impossible. A collective of visionaries building the autonomous future, one line of code and one servo at a time."}
                 scrollText="SCROLL TO EXPLORE"
                 compact={true}
             />

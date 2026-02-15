@@ -117,6 +117,27 @@ const Counter = ({ value, suffix = "" }: { value: number; suffix?: string }) => 
 
 export default function About() {
     const [activeHistory, setActiveHistory] = useState(0);
+    const [config, setConfig] = useState<any>(null);
+
+    useEffect(() => {
+        fetch("/api/site-config")
+            .then((res) => res.json())
+            .then((data) => setConfig(data?.about || {}))
+            .catch((err) => console.error(err));
+    }, []);
+
+    const hero = config?.hero || {
+        tag: "Who We Are",
+        title: "The Architects",
+        subTitle: "of Autonomy.",
+        description: "Yantrika is a robotics production studio bridging the gap between human creativity and mechanical precision. We don't just build bots; we engineer the future."
+    };
+
+    const mission = config?.mission || {
+        title: "Automating the \nImpossible.",
+        content: "At Yantrika, our mission is to demystify robotics. We believe in \"Automating One Bot At a Time,\" fostering a community where engineering meets imagination.\n\nFrom combat robotics to autonomous navigation, our multidisciplinary approach ensures that every member gains hands-on experience in the entire product lifecycle."
+    };
+
     return (
         <main className="relative w-full bg-background text-foreground font-sans selection:bg-blue-500/30 overflow-hidden pt-32">
 
@@ -125,10 +146,10 @@ export default function About() {
 
             {/* 1. HERO SECTION */}
             <HeroSection
-                tag="Who We Are"
-                title="The Architects"
-                subTitle="of Autonomy."
-                description="Yantrika is a robotics production studio bridging the gap between human creativity and mechanical precision. We don't just build bots; we engineer the future."
+                tag={hero.tag}
+                title={hero.title}
+                subTitle={hero.subTitle}
+                description={hero.description}
                 compact={true}
             />
 
@@ -145,17 +166,14 @@ export default function About() {
                     >
                         <RevealText>
                             <h2 className="text-sm font-bold tracking-widest text-gray-400 uppercase mb-4">01 — Our Mission</h2>
-                            <h3 className="text-3xl md:text-4xl lg:text-6xl font-medium mb-6 md:mb-8 leading-tight">
-                                Automating the <br />Impossible.
+                            <h3 className="text-3xl md:text-4xl lg:text-6xl font-medium mb-6 md:mb-8 leading-tight whitespace-pre-line">
+                                {mission.title}
                             </h3>
                         </RevealText>
 
-                        <RevealText className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed space-y-6">
+                        <RevealText className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed space-y-6 whitespace-pre-line">
                             <p>
-                                At Yantrika, our mission is to demystify robotics. We believe in "Automating One Bot At a Time," fostering a community where engineering meets imagination.
-                            </p>
-                            <p>
-                                From combat robotics to autonomous navigation, our multidisciplinary approach ensures that every member gains hands-on experience in the entire product lifecycle.
+                                {mission.content}
                             </p>
                         </RevealText>
 

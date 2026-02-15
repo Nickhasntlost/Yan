@@ -3,7 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
-const testimonials = [
+const defaultTestimonials = [
     {
         quote: "The intersection of hardware and software here is unmatched. It feels like a startup, not a club.",
         name: "Alex Johnson",
@@ -21,9 +21,11 @@ const testimonials = [
     }
 ];
 
-export default function Testimonials() {
+export default function Testimonials({ testimonials = [] }: { testimonials?: any[] }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+    const displayTestimonials = testimonials.length > 0 ? testimonials : defaultTestimonials;
 
     return (
         <section ref={ref} className="py-16 md:py-24 lg:py-32 px-4 md:px-6 relative overflow-hidden">
@@ -61,7 +63,7 @@ export default function Testimonials() {
 
                 {/* Grid Layout */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    {testimonials.map((t, i) => (
+                    {displayTestimonials.map((t, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, y: 50 }}

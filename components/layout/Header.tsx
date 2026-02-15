@@ -48,6 +48,8 @@ export default function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    if (pathname && pathname.startsWith('/admin')) return null;
+
     return (
         <div className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-12 py-8 bg-transparent pointer-events-none text-[#050505] font-sans">
 

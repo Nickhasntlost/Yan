@@ -5,18 +5,20 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react'; // Ensure you have lucide-react or use a simple SVG
 
-const events = [
+const defaultEvents = [
     { title: "RoboWars 2024", date: "03 / 15", type: "Combat" },
     { title: "Computer Vision", date: "04 / 02", type: "Workshop" },
     { title: "Tech Exhibition", date: "05 / 20", type: "Showcase" },
     { title: "Drone Racing", date: "06 / 12", type: "Competition" }
 ];
 
-export default function Events() {
+export default function Events({ events = [] }: { events?: any[] }) {
     const [hovered, setHovered] = useState<number | null>(null);
 
     // Only show the first 3 events on the home page
-    const visibleEvents = events.slice(0, 3);
+    const displayEvents = events.length > 0 ? events : defaultEvents;
+    const visibleEvents = displayEvents.slice(0, 3);
+
 
     return (
         <section className="py-24 px-6 md:px-12 bg-transparent text-foreground relative z-10">

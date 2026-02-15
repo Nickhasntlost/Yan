@@ -2,12 +2,13 @@
 
 import { motion } from 'framer-motion';
 
-const sponsors = ["TechCorp", "Innovate Labs", "Future Systems", "Robo Dynamics", "NVIDIA", "Boston Dynamics", "Arduino", "Raspberry Pi"];
+const defaultSponsors = ["TechCorp", "Innovate Labs", "Future Systems", "Robo Dynamics", "NVIDIA", "Boston Dynamics", "Arduino", "Raspberry Pi"];
 
-export default function Sponsors() {
+export default function Sponsors({ sponsors = [] }: { sponsors?: string[] }) {
+    const displaySponsors = sponsors.length > 0 ? sponsors : defaultSponsors;
     return (
         <section className="py-20 border-y border-black/5 dark:border-white/5 overflow-hidden relative bg-transparent flex flex-col justify-center">
-            
+
             {/* Small Header */}
             <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
                 <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-400 bg-background px-4">
@@ -25,7 +26,7 @@ export default function Sponsors() {
                     transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
                     className="flex gap-20 md:gap-32 items-center pr-20 md:pr-32"
                 >
-                    {[...sponsors, ...sponsors, ...sponsors].map((s, i) => (
+                    {[...displaySponsors, ...displaySponsors, ...displaySponsors].map((s, i) => (
                         <h3 key={i} className="text-2xl md:text-4xl font-bold tracking-tight uppercase text-black/20 dark:text-white/10 hover:text-black/40 dark:hover:text-white/30 transition-colors cursor-default whitespace-nowrap font-sans">
                             {s}
                         </h3>

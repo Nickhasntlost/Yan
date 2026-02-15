@@ -1,9 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Footer() {
+    const pathname = usePathname();
+
+    if (pathname?.startsWith("/admin")) return null;
+
     return (
         <footer className="relative bg-[#f5f3f0] dark:bg-black py-12 md:py-20 px-4 md:px-6 lg:px-12 overflow-hidden border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
             <div className="max-w-[1400px] mx-auto relative z-10">

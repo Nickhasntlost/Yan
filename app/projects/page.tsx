@@ -28,7 +28,7 @@ const staggerContainer: Variants = {
 };
 
 // --- DATA ---
-const categories = ["All", "Combat", "AI/ML", "Utility", "Drones"];
+
 
 interface ProjectAttributes {
     _id: string;
@@ -55,24 +55,7 @@ interface LabProjectAttributes {
 // Lab projects data is now fetched from the API
 // --- COMPONENTS ---
 
-const FilterTabs = ({ active, setActive }: { active: string; setActive: (c: string) => void }) => {
-    return (
-        <div className="flex flex-wrap gap-2 mb-8 md:mb-12 justify-center md:justify-start">
-            {categories.map((cat) => (
-                <button
-                    key={cat}
-                    onClick={() => setActive(cat)}
-                    className={`px-4 md:px-6 py-2 rounded-full text-[10px] md:text-xs font-bold tracking-widest uppercase transition-all border ${active === cat
-                        ? "bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-900/20"
-                        : "bg-white/5 border-white/10 text-gray-500 hover:bg-white/10 hover:border-white/20 dark:text-gray-400"
-                        }`}
-                >
-                    {cat}
-                </button>
-            ))}
-        </div>
-    );
-};
+
 
 const ProjectCard = ({ project, onClick }: { project: ProjectAttributes; onClick: () => void }) => {
     return (
@@ -138,21 +121,27 @@ export default function Projects() {
     const [projects, setProjects] = useState<ProjectAttributes[]>([]);
     const [labProjects, setLabProjects] = useState<LabProjectAttributes[]>([]);
     const [loading, setLoading] = useState(true);
-    const [activeCategory, setActiveCategory] = useState("All");
+
     const [selectedId, setSelectedId] = useState<string | number | null>(null);
     const [selectedLabId, setSelectedLabId] = useState<string | null>(null);
+
+    const [config, setConfig] = useState<any>(null);
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const [projectsRes, labProjectsRes] = await Promise.all([
+                const [projectsRes, labProjectsRes, configRes] = await Promise.all([
                     fetch("/api/projects"),
-                    fetch("/api/lab-projects")
+                    fetch("/api/lab-projects"),
+                    fetch("/api/site-config")
                 ]);
                 const projectsData = await projectsRes.json();
                 const labProjectsData = await labProjectsRes.json();
+                const configData = await configRes.json();
+
                 setProjects(projectsData);
                 setLabProjects(labProjectsData);
+                setConfig(configData);
                 setLoading(false);
             } catch (error) {
                 console.error("Failed to fetch data", error);
@@ -162,9 +151,7 @@ export default function Projects() {
         fetchData();
     }, []);
 
-    const filteredProjects = activeCategory === "All"
-        ? projects
-        : projects.filter(p => p.category === activeCategory);
+
 
     if (loading) {
         return <div className="text-center py-40 text-white min-h-screen pt-38">Loading projects...</div>;
@@ -176,26 +163,20 @@ export default function Projects() {
 
             {/* HERO SECTION */}
             <HeroSection
-                tag="Our Portfolio"
-                title="Engineering the"
-                subTitle="Impossible."
-                description="Explore our latest innovations, from destructive combat bots to life-saving autonomous drones."
+                tag={config?.projects?.hero?.tag || "Our Portfolio"}
+                title={config?.projects?.hero?.title || "Engineering the"}
+                subTitle={config?.projects?.hero?.subTitle || "Impossible."}
+                description={config?.projects?.hero?.description || "Explore our latest innovations, from destructive combat bots to life-saving autonomous drones."}
                 compact={true}
             />
 
             {/* PROJECTS GRID */}
             <section className="relative pb-16 md:pb-32 px-4 md:px-6 lg:px-12 max-w-[1400px] mx-auto z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                >
-                    <FilterTabs active={activeCategory} setActive={setActiveCategory} />
-                </motion.div>
+
 
                 <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
                     <AnimatePresence mode="popLayout">
-                        {filteredProjects.map((project) => (
+                        {projects.map((project) => (
                             <ProjectCard
                                 key={project._id || project.id}
                                 project={project}
@@ -296,7 +277,7 @@ export default function Projects() {
                     </motion.div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-15">
                     {labProjects.map((item, i) => (
                         <motion.div
                             layoutId={`lab-card-${item._id || item.id}`}
@@ -306,7 +287,7 @@ export default function Projects() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.2 }}
-                            className="group relative h-[400px] rounded-[2.5rem] overflow-hidden border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-zinc-900/50 cursor-pointer"
+                            className="group relative h-[350px] rounded-[2.5rem] overflow-hidden border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-zinc-900/50 cursor-pointer"
                         >
                             <Image
                                 src={item.image}

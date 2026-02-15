@@ -88,6 +88,28 @@ export default function Contact() {
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: "" });
 
+    const [config, setConfig] = useState<any>(null);
+
+    React.useEffect(() => {
+        fetch("/api/site-config")
+            .then((res) => res.json())
+            .then((data) => setConfig(data?.contact || {}))
+            .catch((err) => console.error(err));
+    }, []);
+
+    const hero = config?.hero || {
+        tag: "Get In Touch",
+        title: "Let's Build the",
+        subTitle: "Future Together.",
+        description: "Whether you're looking to collaborate, join the club, or just want to talk robotics — our channels are open."
+    };
+
+    const info = config?.info || {
+        email: "yantrika@vcet.edu.in",
+        phone: "+91 87678 31635",
+        address: "Innovation Lab, VCET"
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -123,10 +145,10 @@ export default function Contact() {
 
             {/* HERO SECTION */}
             <HeroSection
-                tag="Get In Touch"
-                title="Let's Build the"
-                subTitle="Future Together."
-                description="Whether you're looking to collaborate, join the club, or just want to talk robotics — our channels are open."
+                tag={hero.tag}
+                title={hero.title}
+                subTitle={hero.subTitle}
+                description={hero.description}
                 compact={true}
             />
 
@@ -193,19 +215,19 @@ export default function Contact() {
                             <ContactInfoItem
                                 icon={Mail}
                                 title="Email Us"
-                                content="yantrika@vcet.edu.in"
+                                content={info.email}
                                 delay={0.1}
                             />
                             <ContactInfoItem
                                 icon={Phone}
                                 title="Call Us"
-                                content="+91 87678 31635"
+                                content={info.phone}
                                 delay={0.2}
                             />
                             <ContactInfoItem
                                 icon={MapPin}
                                 title="Visit Us"
-                                content="Innovation Lab, VCET"
+                                content={info.address}
                                 delay={0.3}
                             />
                         </div>
